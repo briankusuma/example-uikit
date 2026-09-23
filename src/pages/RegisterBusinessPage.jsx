@@ -8,6 +8,7 @@ export const RegisterBusinessPage = () => {
   // Multi-step navigation state: 1 (Step 1 Form), 2 (Contact Details), 3 (Brand Images)
   const [currentStep, setCurrentStep] = useState(1);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   // Step 1 Form States (Free to edit or leave empty as per user prompt)
   const [businessName, setBusinessName] = useState('');
@@ -71,10 +72,10 @@ export const RegisterBusinessPage = () => {
     setCurrentStep(3);
   };
 
-  // Step 3 Submit -> Complete and navigate to Business Page
+  // Step 3 Submit -> Complete and show success alert floating bottom-right
   const handleStep3Submit = (e) => {
     e?.preventDefault();
-    navigate('/business-page');
+    setShowSuccessAlert(true);
   };
 
   return (
@@ -243,7 +244,16 @@ export const RegisterBusinessPage = () => {
         {/* ================= STEP 2: Contact Details ================= */}
         {currentStep === 2 && (
           <>
-            {/* Stepper Navigation */}
+            {/* Header Text */}
+            <div className="biz-register-header">
+              <h1 className="biz-register-header__title">Complete Your Business Profile</h1>
+              <p className="biz-register-header__subtitle">
+                Complete your business profile to help customers discover, trust, and connect
+                with your business. Or do it later.
+              </p>
+            </div>
+
+            {/* Stepper Navigation (Below Header) */}
             <div className="biz-stepper">
               <button
                 type="button"
@@ -262,15 +272,6 @@ export const RegisterBusinessPage = () => {
                 <span className="biz-stepper__badge">2</span>
                 <span>Brand Images</span>
               </button>
-            </div>
-
-            {/* Header Text */}
-            <div className="biz-register-header">
-              <h1 className="biz-register-header__title">Complete Your Business Profile</h1>
-              <p className="biz-register-header__subtitle">
-                Complete your business profile to help customers discover, trust, and connect
-                with your business. Or do it later.
-              </p>
             </div>
 
             {/* Contact Details Card */}
@@ -410,7 +411,16 @@ export const RegisterBusinessPage = () => {
         {/* ================= STEP 3: Brand Images ================= */}
         {currentStep === 3 && (
           <>
-            {/* Stepper Navigation */}
+            {/* Header Text */}
+            <div className="biz-register-header">
+              <h1 className="biz-register-header__title">Complete Your Business Profile</h1>
+              <p className="biz-register-header__subtitle">
+                Complete your business profile to help customers discover, trust, and connect
+                with your business. Or do it later.
+              </p>
+            </div>
+
+            {/* Stepper Navigation (Below Header) */}
             <div className="biz-stepper">
               <button
                 type="button"
@@ -434,15 +444,6 @@ export const RegisterBusinessPage = () => {
                 <span className="biz-stepper__badge biz-stepper__badge--active">2</span>
                 <span>Brand Images</span>
               </button>
-            </div>
-
-            {/* Header Text */}
-            <div className="biz-register-header">
-              <h1 className="biz-register-header__title">Complete Your Business Profile</h1>
-              <p className="biz-register-header__subtitle">
-                Complete your business profile to help customers discover, trust, and connect
-                with your business. Or do it later.
-              </p>
             </div>
 
             {/* Brand Images Card */}
@@ -612,6 +613,44 @@ export const RegisterBusinessPage = () => {
                 style={{ color: '#555555' }}
               >
                 Skip For Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= FLOATING SUCCESS ALERT (Bottom Right) ================= */}
+      {showSuccessAlert && (
+        <div className="biz-floating-alert">
+          <div className="oww-alert oww-alert--success">
+            <div className="oww-alert__content">
+              <span className="oww-alert__icon" />
+              <p className="oww-alert__text">
+                Your business profile has been completed successfully!
+              </p>
+              <button
+                type="button"
+                className="oww-btn oww-btn--primary"
+                onClick={() => navigate('/business-page')}
+                style={{
+                  height: 32,
+                  fontSize: 12,
+                  padding: '0 12px',
+                  borderRadius: 100,
+                  marginLeft: 4,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                View Page
+              </button>
+              <button
+                type="button"
+                className="biz-alert-close-btn"
+                onClick={() => setShowSuccessAlert(false)}
+                aria-label="Close notification"
+                title="Dismiss"
+              >
+                <span className="oww-icon--close" style={{ width: 14, height: 14 }} />
               </button>
             </div>
           </div>
