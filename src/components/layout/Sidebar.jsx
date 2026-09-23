@@ -1,8 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../store/useAppStore';
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
   const profile = useAppStore((state) => state.profile);
   const isLoading = useAppStore((state) => state.isLoading);
   
@@ -119,7 +120,19 @@ export const Sidebar = () => {
 
       {/* Bottom User Profile */}
       <div className="oww-sidebar__footer" style={{ marginTop: 'unset' }}>
-        <div className="oww-sidebar__profile">
+        <div
+          className="oww-sidebar__profile oww-sidebar__profile--clickable"
+          onClick={() => navigate('/register')}
+          role="button"
+          tabIndex={0}
+          title="Register Your Business"
+          style={{ cursor: 'pointer' }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              navigate('/register');
+            }
+          }}
+        >
           <img
             src="https://cdn.jsdelivr.net/gh/briankusuma/oww-uikit@main/dist/assets/sidebar/avatar-bol-athian.png"
             alt="Bol Athian Avatar"
@@ -144,6 +157,10 @@ export const Sidebar = () => {
             className="oww-sidebar__profile-more"
             title="More options"
             aria-label="Account options"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate('/register');
+            }}
           >
             <span
               className="oww-icon--dots-three-fill"

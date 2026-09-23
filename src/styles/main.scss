@@ -30,5 +30,8 @@
 // 9. Skeleton Loading State (Figma Node #23016:27587)
 @use 'modules/skeleton';
 
-// 10. Comprehensive Responsive Design (Tablet & Mobile Breakpoints)
+// 10. Registration & Multi-step Onboarding (Figma Node #22400:83)
+@use 'modules/register';
+
+// 11. Comprehensive Responsive Design (Tablet & Mobile Breakpoints)
 @use 'modules/responsive';

@@ -57,7 +57,7 @@ export const TopBar = ({ title = 'Business Page' }) => {
               className={isLoading ? 'oww-icon--analytics-outline' : 'oww-icon--analytics-outline'}
               style={{ width: 16, height: 16 }}
             /> */}
-            <span>{isLoading ? 'Simulate Loading...' : 'Simulate Loading'}</span>
+            <span>{isLoading ? 'Simulate...' : 'Simulate   '}</span>
           </button>
 
           <button

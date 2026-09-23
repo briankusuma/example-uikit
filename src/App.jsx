@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
 import { BusinessProfilePage } from './pages/BusinessProfilePage';
+import { RegisterBusinessPage } from './pages/RegisterBusinessPage';
 import { PlaceholderPage } from './pages/PlaceholderPage';
 import { SkeletonPage } from './pages/SkeletonPage';
 
@@ -9,6 +10,9 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Full-page Business Registration Flow (Figma Node #22400:83) */}
+        <Route path="register" element={<RegisterBusinessPage />} />
+
         <Route path="/" element={<AppLayout />}>
           {/* Default to Business Profile page */}
           <Route index element={<Navigate to="/business-page" replace />} />
