@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from '../common/Icon';
+import { Button } from '../common/Button';
 import { useAppStore } from '../../store/useAppStore';
 
 export const ProductListSection = () => {
@@ -23,13 +24,14 @@ export const ProductListSection = () => {
     <section className="biz-product-section">
       <div className="biz-product-section__header">
         <h3 className="biz-product-section__title">Product List</h3>
-        <button
-          className="oww-btn oww-btn--primary oww-btn--md"
+        <Button
+          variant="primary"
+          size="md"
+          leftIcon={<Icon name="plus" size={20} />}
           onClick={handleAddProduct}
         >
-          <Icon name="plus" size={18} />
-          <span>Add Product</span>
-        </button>
+          Add Product
+        </Button>
       </div>
 
       {products.length === 0 ? (

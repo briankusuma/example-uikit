@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from '../common/Icon';
+import { Button } from '../common/Button';
 import { useAppStore } from '../../store/useAppStore';
 
 export const ProfileHeader = () => {
@@ -26,13 +27,14 @@ export const ProfileHeader = () => {
         </div>
       </div>
 
-      <button
-        className="oww-btn oww-btn--outline"
+      <Button
+        variant="outline"
+        size="md"
+        leftIcon={<Icon name="pencil" size={20} />}
         onClick={() => alert('Edit Profile dialog')}
       >
-        <Icon name="pencil" size={16} />
-        <span>Edit Profile</span>
-      </button>
+        Edit Profile
+      </Button>
     </div>
   );
 };

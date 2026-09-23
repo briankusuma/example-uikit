@@ -31,4 +31,8 @@ export const useAppStore = create((set) => ({
   products: [],
   addProduct: (product) =>
     set((state) => ({ products: [...state.products, product] })),
+
+  // Cover Image
+  coverImage: '/images/cover-banner.png',
+  setCoverImage: (image) => set({ coverImage: image }),
 }));

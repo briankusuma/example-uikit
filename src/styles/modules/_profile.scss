@@ -1,0 +1,147 @@
+// =============================================================================
+// Category: Profile Header, Cover Banner, & Identity
+// =============================================================================
+
+.biz-profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__cover-wrapper {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background-color: #d9d9d9;
+    border-bottom: 1px solid #f1f1f1;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+
+  &__cover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__cover-btn {
+    position: relative;
+    z-index: 2;
+
+    // Figma Node #22546:15481: tombol di atas foto cover memerlukan background putih & drop shadow
+    .oww-btn {
+      background-color: #ffffff;
+      border-color: #e4e4e4;
+      box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background-color: #f8f8f8;
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  &__body-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+  }
+
+  &__left-column {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #f1f1f1;
+  }
+
+  &__avatar-container {
+    position: absolute;
+    top: -80px;
+    left: 24px;
+    width: 150px;
+    height: 150px;
+    border-radius: 99999px;
+    border: 4px solid #ffffff;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    z-index: 5;
+  }
+
+  &__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__header-info {
+    padding: 85px 24px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  &__category {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    letter-spacing: -0.02em;
+  }
+
+  &__meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  &__meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 500;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: inherit;
+    }
+  }
+
+  &__dot-divider {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #555555;
+  }
+}

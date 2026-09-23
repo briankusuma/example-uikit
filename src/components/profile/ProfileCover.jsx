@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from '../common/Button';
+import { CoverModal } from './CoverModal';
+import { useAppStore } from '../../store/useAppStore';
 
 export const ProfileCover = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { coverImage, setCoverImage } = useAppStore();
+
   return (
     <div className="biz-profile__cover-wrapper">
       <img
-        src="/images/cover-banner.png"
+        src={coverImage}
         alt="Profile Cover"
         className="biz-profile__cover-img"
         onError={(e) => {
@@ -13,13 +19,21 @@ export const ProfileCover = () => {
         }}
       />
       <div className="biz-profile__cover-btn">
-        <button
-          className="oww-btn oww-btn--cover"
-          onClick={() => alert('Add Cover dialog')}
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setIsModalOpen(true)}
         >
           Add Cover
-        </button>
+        </Button>
       </div>
+
+      <CoverModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        currentCover={coverImage}
+        onSaveCover={(newCover) => setCoverImage(newCover)}
+      />
     </div>
   );
 };

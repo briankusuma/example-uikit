@@ -1,0 +1,41 @@
+// =============================================================================
+// Button Helpers & Extensions (Complementing OWW UIKit CDN: uikit.css)
+// =============================================================================
+
+.oww-btn {
+  // Helper: Full Width Button (Belum ada di CDN OWW UIKit)
+  &--full {
+    width: 100% !important;
+    justify-content: center !important;
+    display: flex !important;
+  }
+
+  // Refinements for Large Primary Button (Figma Node #22510:1167 / #22546:15469)
+  &--primary {
+    &.oww-btn--lg {
+      height: 48px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 100px;
+      letter-spacing: -0.02em;
+    }
+
+    // Explicit disabled state for full-width modal CTA (Apply button)
+    &:disabled,
+    &.is-disabled {
+      background-color: #d9d9d9 !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      cursor: not-allowed !important;
+      opacity: 1 !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+  }
+
+  // Helper: Alignment & text truncation inside buttons
+  &__text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

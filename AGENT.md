@@ -84,14 +84,24 @@ example-uikit/
 │   │   └── images/                # Assets gambar (cover, avatar)
 │   ├── components/
 │   │   ├── layout/                # Shell, Sidebar (oww-sidebar), TopBar
-│   │   ├── profile/               # Cover, ProfileHeader, ProfileTabs, BusinessInfoCard
+│   │   ├── profile/               # Cover, CoverModal, ProfileHeader, ProfileTabs, BusinessInfoCard
 │   │   ├── products/              # ProductListSection, EmptyProductState
-│   │   └── common/                # Icon.jsx
+│   │   └── common/                # Button.jsx, Icon.jsx
 │   ├── pages/                     # BusinessProfilePage.jsx & PlaceholderPage.jsx
 │   ├── store/
 │   │   └── useAppStore.js         # Zustand store
 │   ├── styles/
-│   │   └── main.scss              # SCSS layout & responsive media queries
+│   │   ├── modules/               # Folder kelompok SCSS modular
+│   │   │   ├── _button-helpers.scss
+│   │   │   ├── _layout.scss
+│   │   │   ├── _topbar.scss
+│   │   │   ├── _profile.scss
+│   │   │   ├── _tabs.scss
+│   │   │   ├── _products.scss
+│   │   │   ├── _infocard.scss
+│   │   │   ├── _modal.scss
+│   │   │   └── _responsive.scss
+│   │   └── main.scss              # Entry point utama (@use 'modules/...')
 │   ├── App.jsx                    # Root router
 │   └── main.jsx                   # Entry point React
 └── public/

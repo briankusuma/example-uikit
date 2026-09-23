@@ -1,0 +1,70 @@
+// =============================================================================
+// Category: Right Business Profile Card (OWW Card Widget - Sticky Below Navbar)
+// =============================================================================
+
+.biz-info-card {
+  width: 302px;
+  min-width: 302px;
+  padding: 20px;
+  margin-top: 40px;
+  background-color: #f8f8f8;
+  border: 1px solid #e9e9e9;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: fit-content;
+  position: sticky;
+  top: calc(88px + 40px); // 128px (pas 40px di bawah navbar 88px)
+  align-self: flex-start;
+  z-index: 10;
+
+  .oww-card__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+  }
+
+  .oww-card__divider {
+    height: 1px;
+    width: 100%;
+    background-color: #e9e9e9;
+    border: none;
+    margin: 0;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+  }
+
+  &__value {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

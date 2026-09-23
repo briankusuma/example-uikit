@@ -1,0 +1,181 @@
+// =============================================================================
+// Category: Cover Modal Dialog (Figma Node #22510:1167)
+// =============================================================================
+
+.biz-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+  animation: bizFadeIn 0.2s ease-out;
+}
+
+@keyframes bizFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.biz-modal-card {
+  max-width: 628px;
+  width: 100%;
+  border-radius: 24px;
+  background-color: #ffffff;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.16);
+  border: 1px solid #e4e4e4;
+  display: flex;
+  flex-direction: column;
+  animation: bizModalSlideUp 0.25s ease-out;
+
+  .oww-card__divider {
+    height: 1px;
+    width: 100%;
+    background-color: #f1f1f1;
+    border: none;
+    margin: 0;
+  }
+}
+
+@keyframes bizModalSlideUp {
+  from {
+    transform: translateY(12px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.biz-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  width: 100%;
+
+  .oww-card__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+}
+
+.biz-modal-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  background-color: #f1f1f1;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000000;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background-color: #e4e4e4;
+  }
+}
+
+.biz-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  width: 100%;
+
+  .oww-file-upload {
+    max-width: 100%;
+  }
+
+  .oww-file-upload__dropzone {
+    min-height: 200px;
+    background-color: #f8f8f8;
+    border: 1px dashed #e9e9e9;
+
+    &.is-applied {
+      border-style: solid;
+    }
+  }
+}
+
+.biz-modal__divider-or {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.biz-modal__divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #f1f1f1;
+}
+
+.biz-modal__divider-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #555555;
+  user-select: none;
+}
+
+.biz-modal__url-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.biz-modal__url-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: -0.02em;
+}
+
+.biz-modal__url-input-wrapper {
+  width: 100%;
+
+  .oww-input {
+    width: 100%;
+    height: 48px;
+    border-radius: 14px;
+    border: 1px solid #e9e9e9;
+    background-color: #f8f8f8;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #000000;
+
+    &::placeholder {
+      color: #7b7b7b;
+    }
+
+    &:focus {
+      background-color: #ffffff;
+      border-color: #000000;
+    }
+  }
+}
+
+.biz-modal-footer {
+  padding: 20px 24px;
+  width: 100%;
+
+  .oww-btn {
+    height: 48px;
+  }
+}
