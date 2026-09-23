@@ -408,6 +408,163 @@ export const Icon = ({ name, size = 20, color = 'currentColor', className = '' }
         </svg>
       );
 
+    case 'caret-down':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+        >
+          <path
+            d="M5.833 7.917L10 12.083l4.167-4.166"
+            stroke={color}
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+
+    case 'flag-ss':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+          style={{ borderRadius: '2px', overflow: 'hidden' }}
+        >
+          <rect width="20" height="20" rx="2" fill="#078930" />
+          <rect y="0" width="20" height="6.67" fill="#000000" />
+          <rect y="6.67" width="20" height="6.67" fill="#DA121A" />
+          <line x1="0" y1="6.67" x2="20" y2="6.67" stroke="#FFFFFF" strokeWidth="1" />
+          <line x1="0" y1="13.33" x2="20" y2="13.33" stroke="#FFFFFF" strokeWidth="1" />
+          <polygon points="0,0 11.5,10 0,20" fill="#0F47AF" />
+          <polygon points="4.5,10 3.2,9 4.7,9 5.2,7.5 5.7,9 7.2,9 5.9,10 6.4,11.5 5.2,10.5 4,11.5" fill="#FCDD09" />
+        </svg>
+      );
+
+    case 'flag-es':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+          style={{ borderRadius: '2px', overflow: 'hidden' }}
+        >
+          <rect width="20" height="20" rx="2" fill="#C60B1E" />
+          <rect y="5" width="20" height="10" fill="#FFC400" />
+          <circle cx="6" cy="10" r="2" fill="#C60B1E" />
+        </svg>
+      );
+
+    case 'flag-lk':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+          style={{ borderRadius: '2px', overflow: 'hidden' }}
+        >
+          <rect width="20" height="20" rx="2" fill="#FFBE29" />
+          <rect x="2" y="2" width="4" height="16" fill="#00534E" />
+          <rect x="6" y="2" width="3" height="16" fill="#EB7A00" />
+          <rect x="10" y="2" width="8" height="16" fill="#8D153A" />
+        </svg>
+      );
+
+    case 'flag-kr':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+          style={{ borderRadius: '2px', overflow: 'hidden' }}
+        >
+          <rect width="20" height="20" rx="2" fill="#FFFFFF" stroke="#E9E9E9" strokeWidth="0.5" />
+          <path d="M10 5a5 5 0 0 1 0 10 5 5 0 0 1 0-10" fill="#0047A0" />
+          <path d="M10 5a5 5 0 0 0 0 10c2.76 0 2.5-5 0-5s-2.76-5 0-5" fill="#CD2E3A" />
+        </svg>
+      );
+
+    case 'flag-ch':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+          style={{ borderRadius: '2px', overflow: 'hidden' }}
+        >
+          <rect width="20" height="20" rx="2" fill="#D52B1E" />
+          <rect x="8.5" y="4" width="3" height="12" fill="#FFFFFF" />
+          <rect x="4" y="8.5" width="12" height="3" fill="#FFFFFF" />
+        </svg>
+      );
+
+    case 'flag-id':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+          style={{ borderRadius: '2px', overflow: 'hidden' }}
+        >
+          <rect width="20" height="20" rx="2" fill="#FFFFFF" stroke="#E9E9E9" strokeWidth="0.5" />
+          <rect width="20" height="10" fill="#E70011" />
+        </svg>
+      );
+
+    case 'flag-us':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+          style={{ borderRadius: '2px', overflow: 'hidden' }}
+        >
+          <rect width="20" height="20" rx="2" fill="#FFFFFF" />
+          <rect y="0" width="20" height="3" fill="#B22234" />
+          <rect y="6" width="20" height="3" fill="#B22234" />
+          <rect y="12" width="20" height="3" fill="#B22234" />
+          <rect y="17" width="20" height="3" fill="#B22234" />
+          <rect width="9" height="10" fill="#3C3B6E" />
+        </svg>
+      );
+
+    case 'check':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 20 20"
+          fill="none"
+          className={className}
+        >
+          <path
+            d="M4.5 10.5L8 14L15.5 6.5"
+            stroke={color}
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+
     default:
       return null;
   }

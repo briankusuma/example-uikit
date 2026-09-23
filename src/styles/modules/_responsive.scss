@@ -290,21 +290,57 @@
     gap: 16px;
   }
 
-  // Mobile Cover Modal
+  // Mobile Modal (Cover & Edit Profile)
   .biz-modal-overlay {
-    padding: 12px;
+    padding: 0;
     align-items: flex-end;
   }
 
   .biz-modal-card {
-    border-radius: 20px;
-    max-height: 90vh;
-    overflow-y: auto;
+    border-radius: 24px 24px 0 0;
+    max-height: 92vh;
+    width: 100%;
+    max-width: 100%;
   }
 
-  .biz-modal-header,
-  .biz-modal-body,
+  .biz-modal-header {
+    padding: 16px 20px;
+  }
+
+  .biz-modal-body {
+    padding: 16px 20px;
+    gap: 16px;
+
+    &--scrollable {
+      max-height: calc(92vh - 145px);
+    }
+  }
+
   .biz-modal-footer {
-    padding: 16px;
+    padding: 14px 20px;
+  }
+
+  .oww-input-phone {
+    gap: 6px;
+
+    &__select {
+      min-width: 95px;
+      padding: 0 10px;
+      height: 48px;
+    }
+
+    .oww-input {
+      height: 48px;
+    }
+  }
+
+  .oww-input {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  .oww-textarea {
+    height: 120px;
+    font-size: 14px;
   }
 }

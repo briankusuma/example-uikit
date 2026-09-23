@@ -22,10 +22,17 @@ export const useAppStore = create((set) => ({
     about:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     email: 'contact@riseloop.com',
-    phone: '+211 - 7846 8294 8273',
+    phone: '+211 7846 8294 8273',
     website: 'https://www.riseloop.com',
     verified: true,
   },
+  updateProfile: (updatedData) =>
+    set((state) => ({
+      profile: {
+        ...state.profile,
+        ...updatedData,
+      },
+    })),
 
   // Products
   products: [],
