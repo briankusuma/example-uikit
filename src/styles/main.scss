@@ -27,5 +27,8 @@
 // 8. Cover Modal Dialog (Figma Node #22510:1167)
 @use 'modules/modal';
 
-// 9. Comprehensive Responsive Design (Tablet & Mobile Breakpoints)
+// 9. Skeleton Loading State (Figma Node #23016:27587)
+@use 'modules/skeleton';
+
+// 10. Comprehensive Responsive Design (Tablet & Mobile Breakpoints)
 @use 'modules/responsive';

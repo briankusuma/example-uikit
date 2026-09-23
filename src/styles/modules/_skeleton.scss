@@ -1,0 +1,356 @@
+// =============================================================================
+// Category: Skeleton Loading State (Figma Node #23016:27587)
+// =============================================================================
+
+@keyframes oww-skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.oww-skeleton {
+  background: linear-gradient(
+    90deg,
+    #e9e9e9 25%,
+    #f4f4f4 50%,
+    #e9e9e9 75%
+  );
+  background-size: 200% 100%;
+  animation: oww-skeleton-shimmer 1.5s infinite ease-in-out;
+  display: block;
+
+  &--darker {
+    background: linear-gradient(
+      90deg,
+      #e4e4e4 25%,
+      #eeeeee 50%,
+      #e4e4e4 75%
+    );
+    background-size: 200% 100%;
+    animation: oww-skeleton-shimmer 1.5s infinite ease-in-out;
+  }
+
+  &--button {
+    background: linear-gradient(
+      90deg,
+      #d9d9d9 25%,
+      #e8e8e8 50%,
+      #d9d9d9 75%
+    );
+    background-size: 200% 100%;
+    animation: oww-skeleton-shimmer 1.5s infinite ease-in-out;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 1. Sidebar Skeleton Items
+// -----------------------------------------------------------------------------
+.biz-skeleton-nav-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background-color: #e4e4e4;
+  flex-shrink: 0;
+}
+
+.biz-skeleton-nav-text {
+  width: 150px;
+  max-width: 80%;
+  height: 16px;
+  border-radius: 100px;
+  background-color: #e9e9e9;
+}
+
+.biz-skeleton-profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #e4e4e4;
+  flex-shrink: 0;
+}
+
+.biz-skeleton-profile-name {
+  width: 150px;
+  max-width: 100%;
+  height: 16px;
+  border-radius: 100px;
+  background-color: #e4e4e4;
+}
+
+.biz-skeleton-profile-more {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: #e4e4e4;
+  flex-shrink: 0;
+}
+
+// -----------------------------------------------------------------------------
+// 2. Cover Banner Skeleton
+// -----------------------------------------------------------------------------
+.biz-skeleton-cover {
+  width: 100%;
+  height: 250px;
+  background-color: #e9e9e9;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  &__btn {
+    width: 120px;
+    height: 32px;
+    border-radius: 100px;
+    background-color: #d9d9d9;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 3. Profile Avatar & Header Skeleton
+// -----------------------------------------------------------------------------
+.biz-skeleton-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #e9e9e9;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.biz-skeleton-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 24px;
+  gap: 20px;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+}
+
+.biz-skeleton-btn {
+  width: 117px;
+  height: 40px;
+  border-radius: 100px;
+  background-color: #e9e9e9;
+  flex-shrink: 0;
+}
+
+.biz-skeleton-bar {
+  border-radius: 100px;
+  background-color: #e9e9e9;
+
+  &--name {
+    width: 230px;
+    max-width: 80%;
+    height: 24px;
+  }
+
+  &--category {
+    width: 80px;
+    height: 16px;
+  }
+
+  &--follow {
+    width: 100px;
+    height: 16px;
+  }
+
+  &--products-title {
+    width: 120px;
+    height: 16px;
+  }
+
+  &--empty-title {
+    width: 230px;
+    max-width: 80%;
+    height: 24px;
+  }
+
+  &--empty-sub1 {
+    width: 431px;
+    max-width: 90%;
+    height: 16px;
+  }
+
+  &--empty-sub2 {
+    width: 230px;
+    max-width: 70%;
+    height: 16px;
+  }
+
+  &--infocard-title {
+    width: 150px;
+    height: 16px;
+  }
+
+  &--label {
+    width: 80px;
+    height: 16px;
+  }
+
+  &--full {
+    width: 100%;
+    height: 16px;
+  }
+
+  &--value {
+    width: 230px;
+    max-width: 100%;
+    height: 16px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 4. Tabs Skeleton
+// -----------------------------------------------------------------------------
+.biz-skeleton-tabs {
+  display: flex;
+  border-bottom: 1px solid #f1f1f1;
+  margin-top: 24px;
+
+  &__item {
+    flex: 1;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555555;
+    position: relative;
+    cursor: default;
+
+    &--active {
+      color: #000000;
+      font-weight: 600;
+    }
+  }
+
+  &__indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #000000;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 5. Products Section Skeleton
+// -----------------------------------------------------------------------------
+.biz-skeleton-products {
+  padding: 24px 24px 40px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+}
+
+.biz-skeleton-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.biz-skeleton-empty-box {
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  background-color: #e9e9e9;
+  margin-bottom: 12px;
+}
+
+// -----------------------------------------------------------------------------
+// 6. Right Info Card Skeleton
+// -----------------------------------------------------------------------------
+.biz-skeleton-infocard {
+  width: 302px;
+  min-width: 302px;
+  background-color: #f8f8f8;
+  border: 1px solid #f1f1f1;
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: flex-start;
+  margin-top: 24px;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.biz-skeleton-divider {
+  height: 1px;
+  background-color: #e9e9e9;
+  width: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// 7. Responsive Adjustments for Skeleton
+// -----------------------------------------------------------------------------
+@media (max-width: 1024px) {
+  .biz-skeleton-infocard {
+    width: 100%;
+    min-width: 100%;
+    margin-top: 0;
+  }
+
+  .biz-skeleton-nav-text {
+    display: none;
+  }
+
+  .biz-skeleton-profile-name,
+  .biz-skeleton-profile-more {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .biz-skeleton-cover {
+    height: 160px;
+  }
+
+  .biz-skeleton-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .biz-skeleton-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .biz-skeleton-btn {
+      width: 100%;
+    }
+  }
+
+  .biz-skeleton-empty-box {
+    width: 100px;
+    height: 100px;
+  }
+
+  .biz-topbar__skeleton-controls {
+    button:last-child {
+      display: none;
+    }
+  }
+}

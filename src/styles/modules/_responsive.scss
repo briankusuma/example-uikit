@@ -38,13 +38,19 @@
       gap: 0;
 
       &__text,
-      &__badge {
+      &__badge,
+      &__content {
         display: none;
       }
 
       &__icon {
         width: 28px;
         height: 28px;
+
+        [class*='oww-icon--'] {
+          width: 28px;
+          height: 28px;
+        }
       }
     }
 
@@ -169,7 +175,8 @@
       border-radius: 10px;
 
       &__text,
-      &__badge {
+      &__badge,
+      &__content {
         display: none;
       }
 
@@ -177,7 +184,8 @@
         width: 24px;
         height: 24px;
 
-        svg {
+        svg,
+        [class*='oww-icon--'] {
           width: 24px;
           height: 24px;
         }

@@ -4,10 +4,16 @@ import { ProfileHeader } from '../components/profile/ProfileHeader';
 import { ProfileTabs } from '../components/profile/ProfileTabs';
 import { BusinessInfoCard } from '../components/profile/BusinessInfoCard';
 import { ProductListSection } from '../components/products/ProductListSection';
+import { BusinessProfileSkeleton } from '../components/profile/BusinessProfileSkeleton';
 import { useAppStore } from '../store/useAppStore';
 
 export const BusinessProfilePage = () => {
   const activeTab = useAppStore((state) => state.activeTab);
+  const isLoading = useAppStore((state) => state.isLoading);
+
+  if (isLoading) {
+    return <BusinessProfileSkeleton />;
+  }
 
   return (
     <div className="biz-profile">

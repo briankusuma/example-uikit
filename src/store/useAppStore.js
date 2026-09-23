@@ -18,12 +18,12 @@ export const useAppStore = create((set) => ({
     name: 'Rise Loop',
     category: 'Computers',
     joinedDate: 'Nov 1, 2025',
-    location: 'Juba, South Sudan',
+    location: 'jogja, indonesia',
     about:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    email: 'contact@riseloop.com',
-    phone: '+211 7846 8294 8273',
-    website: 'https://www.riseloop.com',
+    email: 'contact@oneweekwonders.com',
+    phone: '+123 4567 8910 1112',
+    website: 'https://oneweekwonders.com/',
     verified: true,
   },
   updateProfile: (updatedData) =>
@@ -42,4 +42,15 @@ export const useAppStore = create((set) => ({
   // Cover Image
   coverImage: '/images/cover-banner.png',
   setCoverImage: (image) => set({ coverImage: image }),
+
+  // Skeleton / Loading State
+  isLoading: false,
+  setIsLoading: (loading) => set({ isLoading: loading }),
+  toggleLoading: () => set((state) => ({ isLoading: !state.isLoading })),
+  simulateLoading: (duration = 1500) => {
+    set({ isLoading: true });
+    setTimeout(() => {
+      set({ isLoading: false });
+    }, duration);
+  },
 }));
