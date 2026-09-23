@@ -1,24 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Icon } from '../common/Icon';
 import { Button } from '../common/Button';
 import { useAppStore } from '../../store/useAppStore';
+import { AddProductModal } from './AddProductModal';
 
 export const ProductListSection = () => {
-  const { products, addProduct } = useAppStore();
-
-  const handleAddProduct = () => {
-    const title = prompt('Enter product name:');
-    if (title && title.trim()) {
-      addProduct({
-        id: Date.now(),
-        name: title.trim(),
-        price: '300,000.00 SSP',
-        desc: 'Premium quality product available in store.',
-        image:
-          'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&auto=format&fit=crop&q=80',
-      });
-    }
-  };
+  const { products } = useAppStore();
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   return (
     <section className="biz-product-section">
@@ -28,7 +16,7 @@ export const ProductListSection = () => {
           variant="primary"
           size="md"
           leftIcon={<Icon name="plus" size={20} />}
-          onClick={handleAddProduct}
+          onClick={() => setIsAddModalOpen(true)}
         >
           Add Product
         </Button>
@@ -73,6 +61,12 @@ export const ProductListSection = () => {
           ))}
         </div>
       )}
+
+      {/* Add Product Modal */}
+      <AddProductModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+      />
     </section>
   );
 };
