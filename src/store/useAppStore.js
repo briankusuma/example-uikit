@@ -53,4 +53,14 @@ export const useAppStore = create((set) => ({
       set({ isLoading: false });
     }, duration);
   },
+
+  // Floating Success Toast Alert (Bottom Right)
+  successToast: null,
+  showSuccessToast: (message = 'Your business profile has been completed successfully!', duration = 2000) => {
+    set({ successToast: message });
+    setTimeout(() => {
+      set({ successToast: null });
+    }, duration);
+  },
+  clearSuccessToast: () => set({ successToast: null }),
 }));

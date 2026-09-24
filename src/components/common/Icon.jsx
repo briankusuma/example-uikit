@@ -161,6 +161,24 @@ export const Icon = ({ name, size = 20, color = 'currentColor', className = '' }
           <path d="m12 19-7-7 7-7" />
         </svg>
       );
+      case 'arrow-right':
+        return (
+          <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={color}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            style={{ transform: 'rotate(180deg)' }}
+          >
+            <path d="M19 12H5" />
+            <path d="m12 19-7-7 7-7" />
+          </svg>
+        );
 
     case 'verified':
       return (
