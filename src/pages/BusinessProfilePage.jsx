@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProfileCover } from '../components/profile/ProfileCover';
+import { ProfileAvatar } from '../components/profile/ProfileAvatar';
 import { ProfileHeader } from '../components/profile/ProfileHeader';
 import { ProfileTabs } from '../components/profile/ProfileTabs';
 import { BusinessInfoCard } from '../components/profile/BusinessInfoCard';
@@ -25,17 +26,7 @@ export const BusinessProfilePage = () => {
         {/* Left Column: Avatar, Profile Info, Tabs, & Content */}
         <div className="biz-profile__left-column">
           {/* 150px Circular Avatar overlapping cover */}
-          <div className="biz-profile__avatar-container">
-            <img
-              src="/images/business-avatar.png"
-              alt="Rise Loop"
-              className="biz-profile__avatar-img"
-              onError={(e) => {
-                e.target.src =
-                  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&auto=format&fit=crop&q=80';
-              }}
-            />
-          </div>
+          <ProfileAvatar />
 
           {/* Profile Header Details */}
           <ProfileHeader />
