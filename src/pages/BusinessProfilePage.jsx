@@ -1,6 +1,6 @@
 import React from 'react';
+import { ProfileAvatar } from '../components/common/ProfileAvatar';
 import { ProfileCover } from '../components/profile/ProfileCover';
-import { ProfileAvatar } from '../components/profile/ProfileAvatar';
 import { ProfileHeader } from '../components/profile/ProfileHeader';
 import { ProfileTabs } from '../components/profile/ProfileTabs';
 import { BusinessInfoCard } from '../components/profile/BusinessInfoCard';

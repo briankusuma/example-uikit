@@ -144,3 +144,5 @@ export const PhoneCountrySelect = ({
     </div>
   );
 };
+
+export default PhoneCountrySelect;

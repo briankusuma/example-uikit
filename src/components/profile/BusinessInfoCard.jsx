@@ -64,3 +64,5 @@ export const BusinessInfoCard = () => {
     </aside>
   );
 };
+
+export default BusinessInfoCard;

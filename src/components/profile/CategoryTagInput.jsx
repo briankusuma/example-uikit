@@ -154,3 +154,5 @@ export const CategoryTagInput = ({
     </div>
   );
 };
+
+export default CategoryTagInput;

@@ -53,10 +53,6 @@ export const TopBar = ({ title = 'Business Page' }) => {
               gap: 6,
             }}
           >
-            {/* <span
-              className={isLoading ? 'oww-icon--analytics-outline' : 'oww-icon--analytics-outline'}
-              style={{ width: 16, height: 16 }}
-            /> */}
             <span>{isLoading ? 'Simulate...' : 'Simulate   '}</span>
           </button>
 
@@ -80,3 +76,5 @@ export const TopBar = ({ title = 'Business Page' }) => {
     </header>
   );
 };
+
+export default TopBar;

@@ -108,3 +108,5 @@ export const LocationSelect = ({
     </div>
   );
 };
+
+export default LocationSelect;

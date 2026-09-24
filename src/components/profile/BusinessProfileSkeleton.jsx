@@ -59,3 +59,5 @@ export const BusinessProfileSkeleton = () => {
     </div>
   );
 };
+
+export default BusinessProfileSkeleton;

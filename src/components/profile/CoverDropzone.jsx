@@ -145,3 +145,5 @@ export const CoverDropzone = ({
     </div>
   );
 };
+
+export default CoverDropzone;

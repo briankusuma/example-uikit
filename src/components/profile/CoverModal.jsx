@@ -6,7 +6,7 @@ import { CoverUrlInput } from './CoverUrlInput';
 
 /**
  * CoverModal component according to Figma node #22510:1167
- * Modularized with CoverDropzone and CoverUrlInput.
+ * Composed with CoverDropzone and CoverUrlInput.
  */
 export const CoverModal = ({ isOpen, onClose, currentCover, onSaveCover }) => {
   const [selectedImage, setSelectedImage] = useState(null);

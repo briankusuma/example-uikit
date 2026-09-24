@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Icon } from '../common/Icon';
 import { Button } from '../common/Button';
-import { useAppStore } from '../../store/useAppStore';
+import { ProductCard } from './ProductCard';
+import { ProductEmptyState } from './ProductEmptyState';
 import { AddProductModal } from './AddProductModal';
+import { useAppStore } from '../../store/useAppStore';
 
+/**
+ * ProductListSection component.
+ * Displays the product list header, add product trigger, list of ProductCards or ProductEmptyState.
+ */
 export const ProductListSection = () => {
   const { products } = useAppStore();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -23,19 +29,7 @@ export const ProductListSection = () => {
       </div>
 
       {products.length === 0 ? (
-        <div className="biz-product-section__empty-state">
-          <div className="biz-product-section__empty-illustration">
-            <Icon name="empty-box" size={150} />
-          </div>
-          <div className="biz-product-section__empty-texts">
-            <h4 className="biz-product-section__empty-title">
-              No product added
-            </h4>
-            <p className="biz-product-section__empty-desc">
-              Add your first product to start selling and reach customers.
-            </p>
-          </div>
-        </div>
+        <ProductEmptyState />
       ) : (
         <div
           style={{
@@ -46,18 +40,7 @@ export const ProductListSection = () => {
           }}
         >
           {products.map((item) => (
-            <div key={item.id} className="oww-card oww-card--product">
-              <div className="oww-card__media">
-                <img src={item.image} alt={item.name} />
-              </div>
-              <div className="oww-card__content">
-                <h4 className="oww-card__product-title" title={item.name}>
-                  {item.name}
-                </h4>
-                <p className="oww-card__product-desc">{item.desc}</p>
-                <div className="oww-card__price">{item.price}</div>
-              </div>
-            </div>
+            <ProductCard key={item.id} product={item} />
           ))}
         </div>
       )}
@@ -70,3 +53,5 @@ export const ProductListSection = () => {
     </section>
   );
 };
+
+export default ProductListSection;

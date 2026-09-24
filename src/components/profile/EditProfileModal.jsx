@@ -230,23 +230,23 @@ export const EditProfileModal = ({ isOpen, onClose }) => {
             location={location}
             onLocationChange={setLocation}
           />
+
+          {/* Save Changes button inside scrollable form */}
+          <div className="biz-modal-form-actions" style={{ marginTop: '8px', width: '100%', paddingBottom: '4px' }}>
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              fullWidth
+              disabled={!isValid}
+            >
+              {isSavedToast ? 'Changes Saved!' : 'Save Changes'}
+            </Button>
+          </div>
         </form>
-
-        <hr className="oww-card__divider" />
-
-        {/* Modal Footer with Save Changes button */}
-        <div className="biz-modal-footer">
-          <Button
-            variant="primary"
-            size="lg"
-            fullWidth
-            disabled={!isValid}
-            onClick={handleSave}
-          >
-            {isSavedToast ? 'Changes Saved!' : 'Save Changes'}
-          </Button>
-        </div>
       </div>
     </div>
   );
 };
+
+export default EditProfileModal;

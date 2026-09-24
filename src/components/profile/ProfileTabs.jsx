@@ -41,3 +41,5 @@ export const ProfileTabs = ({
     </div>
   );
 };
+
+export default ProfileTabs;

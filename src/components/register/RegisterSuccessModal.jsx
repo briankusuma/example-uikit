@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../common/Button';
 
 export const RegisterSuccessModal = ({ onCompleteProfile, onSkip }) => {
   return (
@@ -21,21 +22,19 @@ export const RegisterSuccessModal = ({ onCompleteProfile, onSkip }) => {
 
         {/* Modal Action Buttons */}
         <div className="biz-register-modal__actions">
-          <button
-            type="button"
-            className="oww-btn oww-btn--primary"
+          <Button
+            variant="primary"
             onClick={onCompleteProfile}
           >
             Complete Profile
-          </button>
-          <button
-            type="button"
-            className="oww-btn oww-btn--ghost"
+          </Button>
+          <Button
+            variant="ghost"
             onClick={onSkip}
             style={{ color: '#555555' }}
           >
             Skip For Now
-          </button>
+          </Button>
         </div>
       </div>
     </div>

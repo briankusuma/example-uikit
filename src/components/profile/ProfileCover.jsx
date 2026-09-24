@@ -37,3 +37,5 @@ export const ProfileCover = () => {
     </div>
   );
 };
+
+export default ProfileCover;

@@ -4,6 +4,10 @@ import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
 import { useAppStore } from '../../store/useAppStore';
 
+/**
+ * AppLayout component.
+ * Defines the main layout shell orchestrating Sidebar, TopBar, and main content area.
+ */
 export const AppLayout = () => {
   const successToast = useAppStore((state) => state.successToast);
   const clearSuccessToast = useAppStore((state) => state.clearSuccessToast);
@@ -45,3 +49,5 @@ export const AppLayout = () => {
     </div>
   );
 };
+
+export default AppLayout;
