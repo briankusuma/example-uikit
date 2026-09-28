@@ -6,7 +6,8 @@ export const PRODUCTS_DATA = [
   {
     id: 1,
     title: 'Pro Gaming Desktop PC',
-    price: '300,000.00 SSP',
+    price: '145,000.00 SSP',
+    createdAt: '2025-11-01',
     image: '/images/product-gaming-pc.png',
     images: [
       '/images/product-gaming-pc.png',
@@ -28,7 +29,8 @@ export const PRODUCTS_DATA = [
   {
     id: 2,
     title: 'Macbook Pro 2021',
-    price: '300,000.00 SSP',
+    price: '120,000.00 SSP',
+    createdAt: '2025-11-02',
     image: '/images/product-macbook-pro.png',
     images: [
       '/images/product-macbook-pro.png',
@@ -47,7 +49,8 @@ export const PRODUCTS_DATA = [
   {
     id: 3,
     title: 'Beats Studio Pro',
-    price: '300,000.00 SSP',
+    price: '45,000.00 SSP',
+    createdAt: '2025-11-03',
     image: '/images/product-beats-studio.png',
     images: [
       '/images/product-beats-studio.png',
@@ -66,7 +69,8 @@ export const PRODUCTS_DATA = [
   {
     id: 4,
     title: 'Airpods Max',
-    price: '300,000.00 SSP',
+    price: '85,000.00 SSP',
+    createdAt: '2025-11-04',
     image: '/images/product-airpods-max.png',
     images: [
       '/images/product-airpods-max.png',
@@ -85,7 +89,8 @@ export const PRODUCTS_DATA = [
   {
     id: 5,
     title: 'Pro Gaming Desktop PC (Special Edition)',
-    price: '300,000.00 SSP',
+    price: '180,000.00 SSP',
+    createdAt: '2025-11-05',
     image: '/images/product-gaming-pc-2.png',
     images: [
       '/images/product-gaming-pc-2.png',
@@ -107,7 +112,8 @@ export const PRODUCTS_DATA = [
   {
     id: 6,
     title: 'Macbook Pro 2021 M1 Max',
-    price: '300,000.00 SSP',
+    price: '210,000.00 SSP',
+    createdAt: '2025-11-06',
     image: '/images/product-macbook-pro.png',
     images: [
       '/images/product-macbook-pro.png',
@@ -126,7 +132,8 @@ export const PRODUCTS_DATA = [
   {
     id: 7,
     title: 'Beats Studio Pro Wireless',
-    price: '300,000.00 SSP',
+    price: '55,000.00 SSP',
+    createdAt: '2025-11-07',
     image: '/images/product-beats-studio.png',
     images: [
       '/images/product-beats-studio.png',
@@ -145,7 +152,8 @@ export const PRODUCTS_DATA = [
   {
     id: 8,
     title: 'Pro Gaming Desktop PC Ultimate',
-    price: '300,000.00 SSP',
+    price: '280,000.00 SSP',
+    createdAt: '2025-11-08',
     image: '/images/product-gaming-pc.png',
     images: [
       '/images/product-gaming-pc.png',

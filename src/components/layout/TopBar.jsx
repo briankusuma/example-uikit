@@ -1,12 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Icon } from '../common/Icon';
 import { useAppStore } from '../../store/useAppStore';
 
-export const TopBar = ({ title = 'Business Page' }) => {
+export const TopBar = ({ title = 'Business Page', hideSkeletonControls }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { searchQuery, setSearchQuery, isLoading, simulateLoading, toggleLoading } =
     useAppStore();
+
+  const isHome = location.pathname === '/' || location.pathname === '/home';
+  const shouldHideSkeleton = hideSkeletonControls ?? isHome;
 
   return (
     <header className="biz-topbar">
@@ -37,41 +41,43 @@ export const TopBar = ({ title = 'Business Page' }) => {
         </div>
 
         {/* Skeleton Action Controls */}
-        <div className="biz-topbar__skeleton-controls" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button
-            type="button"
-            className={`oww-btn oww-btn--sm ${isLoading ? 'oww-btn--primary' : 'oww-btn--outline'}`}
-            onClick={() => simulateLoading(2000)}
-            title="Simulate 2s Skeleton Loading"
-            style={{
-              height: 38,
-              padding: '6px 14px',
-              borderRadius: 100,
-              fontSize: 13,
-              fontWeight: 500,
-              whiteSpace: 'nowrap',
-              gap: 6,
-            }}
-          >
-            <span>{isLoading ? 'Simulate...' : 'Simulate   '}</span>
-          </button>
+        {!shouldHideSkeleton && (
+          <div className="biz-topbar__skeleton-controls" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <button
+              type="button"
+              className={`oww-btn oww-btn--sm ${isLoading ? 'oww-btn--primary' : 'oww-btn--outline'}`}
+              onClick={() => simulateLoading(2000)}
+              title="Simulate 2s Skeleton Loading"
+              style={{
+                height: 38,
+                padding: '6px 14px',
+                borderRadius: 100,
+                fontSize: 13,
+                fontWeight: 500,
+                whiteSpace: 'nowrap',
+                gap: 6,
+              }}
+            >
+              <span>{isLoading ? 'Simulate...' : 'Simulate   '}</span>
+            </button>
 
-          <button
-            type="button"
-            className={`oww-btn oww-btn--sm ${isLoading ? 'oww-btn--cover' : 'oww-btn--outline'}`}
-            onClick={toggleLoading}
-            title={isLoading ? 'Turn Skeleton OFF' : 'Keep Skeleton ON'}
-            style={{
-              height: 38,
-              padding: '6px 12px',
-              borderRadius: 100,
-              fontSize: 12,
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {isLoading ? 'Hide Skeleton' : 'Toggle Skeleton'}
-          </button>
-        </div>
+            <button
+              type="button"
+              className={`oww-btn oww-btn--sm ${isLoading ? 'oww-btn--cover' : 'oww-btn--outline'}`}
+              onClick={toggleLoading}
+              title={isLoading ? 'Turn Skeleton OFF' : 'Keep Skeleton ON'}
+              style={{
+                height: 38,
+                padding: '6px 12px',
+                borderRadius: 100,
+                fontSize: 12,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {isLoading ? 'Hide Skeleton' : 'Toggle Skeleton'}
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

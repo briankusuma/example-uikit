@@ -12,6 +12,8 @@ export const StoreProductCard = ({
   businessName = 'Riseloop',
   businessAvatar = '/images/business-avatar.png',
   isVerified = true,
+  showBusinessProfile = true,
+  showOptions = true,
   onOptionsClick,
   onClick,
   className = '',
@@ -22,32 +24,36 @@ export const StoreProductCard = ({
       onClick={onClick}
     >
       {/* Business Header */}
-      <header className="biz-store-card__header">
-        <div className="biz-store-card__business">
-          <img
-            src={businessAvatar}
-            alt={businessName}
-            className="biz-store-card__avatar"
-          />
-          <span className="biz-store-card__name">{businessName}</span>
-          {isVerified && (
-            <span className="biz-store-card__verified" title="Verified Business">
-              <Icon name="verified" size={16} />
-            </span>
+      {showBusinessProfile && (
+        <header className="biz-store-card__header">
+          <div className="biz-store-card__business">
+            <img
+              src={businessAvatar}
+              alt={businessName}
+              className="biz-store-card__avatar"
+            />
+            <span className="biz-store-card__name">{businessName}</span>
+            {isVerified && (
+              <span className="biz-store-card__verified" title="Verified Business">
+                <Icon name="verified" size={16} />
+              </span>
+            )}
+          </div>
+          {showOptions && (
+            <button
+              type="button"
+              className="biz-store-card__options-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                onOptionsClick && onOptionsClick();
+              }}
+              aria-label="Product options"
+            >
+              <Icon name="dots-three" size={18} color="#777777" />
+            </button>
           )}
-        </div>
-        <button
-          type="button"
-          className="biz-store-card__options-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            onOptionsClick && onOptionsClick();
-          }}
-          aria-label="Product options"
-        >
-          <Icon name="dots-three" size={18} color="#777777" />
-        </button>
-      </header>
+        </header>
+      )}
 
       {/* Media with Floating Price Tag */}
       <div

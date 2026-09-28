@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProfileAvatar } from '../components/common/ProfileAvatar';
 import { ProfileCover } from '../components/profile/ProfileCover';
 import { ProfileHeader } from '../components/profile/ProfileHeader';
@@ -7,38 +7,40 @@ import { BusinessInfoCard } from '../components/profile/BusinessInfoCard';
 import { ExploreProductsFromCard } from '../components/profile/ExploreProductsFromCard';
 import { ProductListSection } from '../components/products/ProductListSection';
 import { BusinessAdsSection } from '../components/products/BusinessAdsSection';
-import { BusinessProfileSkeleton } from '../components/profile/BusinessProfileSkeleton';
-import { useAppStore } from '../store/useAppStore';
 
-export const BusinessProfilePage = () => {
-  const activeTab = useAppStore((state) => state.activeTab);
-  const isLoading = useAppStore((state) => state.isLoading);
-
-  if (isLoading) {
-    return <BusinessProfileSkeleton />;
-  }
+/**
+ * HomePage component
+ * Figma Node #22699:12018 ("Shop - Product list")
+ * Public display view of the store using Rise Loop profile data from useAppStore
+ * without editable actions (no Add Cover, no Edit Profile, no Add Product).
+ */
+export const HomePage = () => {
+  const [activeTab, setActiveTab] = useState('shop');
 
   return (
     <div className="biz-profile">
-      {/* Cover Image */}
-      <ProfileCover />
+      {/* Cover Image (Read-Only: No Add Cover button) */}
+      <ProfileCover isEditable={false} />
 
       {/* Main Body Split: Left Column & Right Widget */}
       <div className="biz-profile__body-row">
         {/* Left Column: Avatar, Profile Info, Tabs, & Content */}
         <div className="biz-profile__left-column">
-          {/* 150px Circular Avatar overlapping cover */}
+          {/* 150px Circular Avatar */}
           <ProfileAvatar />
 
-          {/* Profile Header Details */}
-          <ProfileHeader />
+          {/* Profile Header (Read-Only: No Edit Profile button) */}
+          <ProfileHeader isEditable={false} />
 
           {/* Tabs: Shop | Ads */}
-          <ProfileTabs />
+          <ProfileTabs
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
 
           {/* Tab Content */}
           {activeTab === 'shop' ? (
-            <ProductListSection />
+            <ProductListSection isEditable={false} />
           ) : (
             <BusinessAdsSection />
           )}
@@ -53,3 +55,5 @@ export const BusinessProfilePage = () => {
     </div>
   );
 };
+
+export default HomePage;

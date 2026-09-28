@@ -4,8 +4,9 @@ import { Button } from '../common/Button';
 import { useAppStore } from '../../store/useAppStore';
 import { EditProfileModal } from './EditProfileModal';
 
-export const ProfileHeader = () => {
-  const profile = useAppStore((state) => state.profile);
+export const ProfileHeader = ({ isEditable = true, customProfile }) => {
+  const storeProfile = useAppStore((state) => state.profile);
+  const profile = customProfile || storeProfile;
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   return (
@@ -30,21 +31,24 @@ export const ProfileHeader = () => {
           </div>
         </div>
 
-        <Button
-          variant="outline"
-          size="md"
-          leftIcon={<Icon name="pencil" size={20} />}
-          onClick={() => setIsEditModalOpen(true)}
-        >
-          Edit Profile
-        </Button>
+        {isEditable && (
+          <Button
+            variant="outline"
+            size="md"
+            leftIcon={<Icon name="pencil" size={20} />}
+            onClick={() => setIsEditModalOpen(true)}
+          >
+            Edit Profile
+          </Button>
+        )}
       </div>
 
-      {/* Edit Profile Modal */}
-      <EditProfileModal
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-      />
+      {isEditable && (
+        <EditProfileModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+        />
+      )}
     </>
   );
 };

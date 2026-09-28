@@ -1,9 +1,10 @@
 import React from 'react';
+import { Icon } from '../common/Icon';
 import { useAppStore } from '../../store/useAppStore';
 
 const DEFAULT_TABS = [
-  { id: 'shop', label: 'Shop' },
-  { id: 'ads', label: 'Ads' },
+  { id: 'shop', label: 'Shop', icon: 'storefront' },
+  { id: 'ads', label: 'Ads', icon: 'ads' },
 ];
 
 /**
@@ -34,7 +35,16 @@ export const ProfileTabs = ({
             }`}
             onClick={() => handleTabChange(tab.id)}
           >
-            {tab.label}
+            {tab.icon && (
+              <span className="biz-tabs__icon">
+                <Icon
+                  name={tab.icon}
+                  size={18}
+                  color={isActive ? '#000000' : '#555555'}
+                />
+              </span>
+            )}
+            <span className="biz-tabs__label">{tab.label}</span>
           </button>
         );
       })}

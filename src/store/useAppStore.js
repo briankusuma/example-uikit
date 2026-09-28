@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { PRODUCTS_DATA } from '../components/adsStore/productsData';
 
 export const useAppStore = create((set) => ({
   // Tab State
@@ -35,9 +36,9 @@ export const useAppStore = create((set) => ({
     })),
 
   // Products
-  products: [],
+  products: PRODUCTS_DATA,
   addProduct: (product) =>
-    set((state) => ({ products: [...state.products, product] })),
+    set((state) => ({ products: [product, ...state.products] })),
 
   // Cover Image
   coverImage: '/images/cover-banner.png',

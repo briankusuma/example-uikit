@@ -7,8 +7,9 @@ import { BusinessInfoItem } from './BusinessInfoItem';
  * Displays details (About, Email, Phone, Website) on the right column.
  * Uses modular BusinessInfoItem for rendering info rows.
  */
-export const BusinessInfoCard = () => {
-  const profile = useAppStore((state) => state.profile);
+export const BusinessInfoCard = ({ customProfile }) => {
+  const storeProfile = useAppStore((state) => state.profile);
+  const profile = customProfile || storeProfile;
 
   const infoFields = [
     {
