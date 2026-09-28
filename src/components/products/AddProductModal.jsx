@@ -99,6 +99,11 @@ export const AddProductModal = ({ isOpen, onClose }) => {
       thumbnails: images,
     });
 
+    const showToast = useAppStore.getState().showSuccessToast;
+    if (showToast) {
+      showToast('Product added successfully!');
+    }
+
     onClose();
   };
 

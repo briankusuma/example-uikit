@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Button } from '../common/Button';
 import { Icon } from '../common/Icon';
 import { ProductActionDropdown } from './ProductActionDropdown';
+import { ProductShareModal } from './ProductShareModal';
 
 /**
  * ProductInfoSection component
- * Figma Node #22904:38167 and #22689:10619: Seller profile, pricing, tags, description, purchase actions, and options menu
+ * Figma Node #22904:38167, #22689:10619, and #22703:20565: Seller profile, pricing, tags, description, purchase actions, options menu, and share popup
  */
 export const ProductInfoSection = ({
   title,
@@ -26,6 +27,7 @@ export const ProductInfoSection = ({
 }) => {
   const [isCopied, setIsCopied] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const handleShare = () => {
     if (onShare) {
@@ -126,14 +128,17 @@ export const ProductInfoSection = ({
         </div>
       )}
 
-      {/* Action Buttons: Message + Buy Now */}
+      {/* Action Buttons: Share + Buy Now */}
       <div className="biz-product-info__actions">
         <button
           type="button"
           className="biz-product-info__message-btn"
-          onClick={onContactSeller}
-          title="Contact Seller"
-          aria-label="Contact Seller"
+          onClick={() => {
+            setIsShareModalOpen(true);
+            if (onShare) onShare();
+          }}
+          title="Share Product"
+          aria-label="Share Product"
         >
           <Icon name="arrow-share" size={20} color="#000000" />
         </button>
@@ -148,6 +153,13 @@ export const ProductInfoSection = ({
           Buy Now
         </Button>
       </div>
+
+      {/* Share Modal Popup (Figma Node #22703:20565) */}
+      <ProductShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        productTitle={title}
+      />
     </div>
   );
 };

@@ -12,6 +12,8 @@ import { RegisterSuccessModal } from '../components/register/RegisterSuccessModa
 export const RegisterBusinessPage = () => {
   const navigate = useNavigate();
   const showSuccessToast = useAppStore((state) => state.showSuccessToast);
+  const successToast = useAppStore((state) => state.successToast);
+  const clearSuccessToast = useAppStore((state) => state.clearSuccessToast);
 
   // Multi-step navigation state: 1 (Step 1 Form), 2 (Contact Details), 3 (Brand Images)
   const [currentStep, setCurrentStep] = useState(1);
@@ -142,6 +144,37 @@ export const RegisterBusinessPage = () => {
           onCompleteProfile={handleProceedToStep2}
           onSkip={handleExitFlow}
         />
+      )}
+
+      {/* ================= FLOATING SUCCESS ALERT ================= */}
+      {successToast && (
+        <div
+          className={`biz-floating-alert ${
+            typeof successToast === 'object' && successToast?.position === 'top'
+              ? 'biz-floating-alert--top'
+              : ''
+          }`}
+        >
+          <div className="oww-alert oww-alert--success">
+            <div className="oww-alert__content">
+              <span className="oww-alert__icon" />
+              <p className="oww-alert__text">
+                {typeof successToast === 'object' && successToast !== null
+                  ? successToast.message
+                  : successToast}
+              </p>
+              <button
+                type="button"
+                className="biz-alert-close-btn"
+                onClick={clearSuccessToast}
+                aria-label="Close notification"
+                title="Dismiss"
+              >
+                <span className="oww-icon--close" style={{ width: 14, height: 14 }} />
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

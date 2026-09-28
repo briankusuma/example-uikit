@@ -17,6 +17,10 @@ export const CoverModal = ({ isOpen, onClose, currentCover, onSaveCover }) => {
   const handleApply = () => {
     if (selectedImage) {
       onSaveCover(selectedImage);
+      const showToast = useAppStore.getState().showSuccessToast;
+      if (showToast) {
+        showToast('Cover image updated successfully!');
+      }
       handleClose();
     }
   };

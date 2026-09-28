@@ -621,15 +621,22 @@
   }
 }
 
-// 8.5. Floating Success Alert (Bottom Right)
+// 8.5. Floating Success Alert (Bottom Right / Top Right)
 .biz-floating-alert {
   position: fixed;
   bottom: 32px;
   right: 32px;
-  z-index: 1000;
+  z-index: 20000; // Always on top of modals (10000)
   display: flex;
   align-items: center;
   animation: bizAlertSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  &--top {
+    bottom: auto;
+    top: 32px;
+    right: 32px;
+    animation: bizAlertSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 
   .oww-alert {
     padding: 12px 18px;
@@ -678,6 +685,17 @@
   from {
     opacity: 0;
     transform: translateY(24px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bizAlertSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -759,6 +777,11 @@
     bottom: 20px;
     right: 16px;
     left: 16px;
+
+    &--top {
+      bottom: auto;
+      top: 20px;
+    }
 
     .oww-alert {
       width: 100%;

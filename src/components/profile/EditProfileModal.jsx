@@ -111,6 +111,10 @@ export const EditProfileModal = ({ isOpen, onClose }) => {
     });
 
     setIsSavedToast(true);
+    const showToast = useAppStore.getState().showSuccessToast;
+    if (showToast) {
+      showToast('Profile updated successfully!');
+    }
     setTimeout(() => {
       onClose();
     }, 400);

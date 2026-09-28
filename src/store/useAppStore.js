@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { PRODUCTS_DATA } from '../components/adsStore/productsData';
+let toastTimer = null;
 
-export const useAppStore = create((set) => ({
+export const useAppStore = create((set, get) => ({
   // Tab State
   activeTab: 'shop', // 'shop' | 'ads'
   setActiveTab: (tab) => set({ activeTab: tab }),
@@ -59,13 +60,55 @@ export const useAppStore = create((set) => ({
     }, duration);
   },
 
-  // Floating Success Toast Alert (Bottom Right)
+  // Floating Success Toast Alert (Bottom Right / Top Right)
   successToast: null,
-  showSuccessToast: (message = 'Your business profile has been completed successfully!', duration = 2000) => {
-    set({ successToast: message });
-    setTimeout(() => {
+  showSuccessToast: (
+    message = 'Your business profile has been completed successfully!',
+    arg2 = 2500,
+    arg3 = {}
+  ) => {
+    let duration = 2500;
+    let options = {};
+
+    if (typeof arg2 === 'number') {
+      duration = arg2;
+      if (typeof arg3 === 'object' && arg3 !== null) {
+        options = arg3;
+      }
+    } else if (typeof arg2 === 'object' && arg2 !== null) {
+      options = arg2;
+      if (typeof arg2.duration === 'number') {
+        duration = arg2.duration;
+      }
+    }
+
+    if (toastTimer) {
+      clearTimeout(toastTimer);
+      toastTimer = null;
+    }
+
+    let toastData;
+    if (typeof message === 'object' && message !== null) {
+      toastData = { ...message, ...options };
+      if (typeof message.duration === 'number') {
+        duration = message.duration;
+      }
+    } else {
+      toastData = { message: String(message), ...options };
+    }
+
+    set({ successToast: toastData });
+
+    toastTimer = setTimeout(() => {
       set({ successToast: null });
+      toastTimer = null;
     }, duration);
   },
-  clearSuccessToast: () => set({ successToast: null }),
+  clearSuccessToast: () => {
+    if (toastTimer) {
+      clearTimeout(toastTimer);
+      toastTimer = null;
+    }
+    set({ successToast: null });
+  },
 }));
