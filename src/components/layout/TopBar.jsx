@@ -3,7 +3,29 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Icon } from '../common/Icon';
 import { useAppStore } from '../../store/useAppStore';
 
-export const TopBar = ({ title = 'Business Page', hideSkeletonControls }) => {
+const ROUTE_TITLES = {
+  '/': 'Homepage',
+  '/home': 'Homepage',
+  '/business-page': 'Business Page',
+  '/rise-loop': 'Business Page',
+  '/explore': 'Explore',
+  '/messages': 'Messages',
+  '/notifications': 'Notifications',
+  '/dashboard': 'Dashboard',
+  '/settings': 'Settings',
+  '/ads-store': 'Ads/Store',
+  '/skeleton': 'Skeleton Page',
+};
+
+const getTitleFromPathname = (pathname) => {
+  if (ROUTE_TITLES[pathname]) return ROUTE_TITLES[pathname];
+  const matchedKey = Object.keys(ROUTE_TITLES).find(
+    (key) => key !== '/' && pathname.startsWith(key)
+  );
+  return matchedKey ? ROUTE_TITLES[matchedKey] : 'Homepage';
+};
+
+export const TopBar = ({ title, hideSkeletonControls }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { searchQuery, setSearchQuery, isLoading, simulateLoading, toggleLoading } =
@@ -11,6 +33,7 @@ export const TopBar = ({ title = 'Business Page', hideSkeletonControls }) => {
 
   const isHome = location.pathname === '/' || location.pathname === '/home';
   const shouldHideSkeleton = hideSkeletonControls ?? isHome;
+  const currentTitle = title || getTitleFromPathname(location.pathname);
 
   return (
     <header className="biz-topbar">
@@ -23,7 +46,7 @@ export const TopBar = ({ title = 'Business Page', hideSkeletonControls }) => {
         >
           <Icon name="arrow-left" size={24} />
         </button>
-        <h1 className="biz-topbar__title">{title}</h1>
+        <h1 className="biz-topbar__title">{currentTitle}</h1>
       </div>
 
       <div className="biz-topbar__right" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
