@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
 import { useAppStore } from '../../store/useAppStore';
@@ -9,8 +9,11 @@ import { useAppStore } from '../../store/useAppStore';
  * Defines the main layout shell orchestrating Sidebar, TopBar, and main content area.
  */
 export const AppLayout = () => {
+  const location = useLocation();
   const successToast = useAppStore((state) => state.successToast);
   const clearSuccessToast = useAppStore((state) => state.clearSuccessToast);
+
+  const isAdsStore = location.pathname.startsWith('/ads-store');
 
   return (
     <div className="app-shell">
@@ -18,7 +21,7 @@ export const AppLayout = () => {
         <div className="app-container">
           <Sidebar />
           <div className="biz-main-area">
-            <TopBar />
+            {!isAdsStore && <TopBar />}
             <main>
               <Outlet />
             </main>

@@ -1,0 +1,76 @@
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { ProductDetailTopBar } from '../components/adsStore/ProductDetailTopBar';
+import { ProductGallery } from '../components/adsStore/ProductGallery';
+import { ProductInfoSection } from '../components/adsStore/ProductInfoSection';
+import { getProductById } from '../components/adsStore/productsData';
+import { useAppStore } from '../store/useAppStore';
+
+/**
+ * ProductDetailPage component
+ * Figma Node #22904:38148 ("Redirect to product detail")
+ */
+export const ProductDetailPage = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const setSuccessToast = useAppStore((state) => state.setSuccessToast);
+
+  const product = getProductById(id);
+
+  const handleBuyNow = () => {
+    if (setSuccessToast) {
+      setSuccessToast(`Order placed for ${product.title}!`);
+    } else {
+      alert(`Proceeding to checkout for ${product.title}`);
+    }
+  };
+
+  const handleContactSeller = () => {
+    navigate('/messages');
+  };
+
+  return (
+    <div className="biz-product-detail-page">
+      {/* Top Bar with Back Arrow */}
+      <ProductDetailTopBar
+        title="Product Detail"
+        onBack={() => navigate('/ads-store')}
+      />
+
+      {/* Main Content: Gallery (Left) + Product Info (Right) */}
+      <div className="biz-product-detail-body">
+        <div className="biz-product-detail-content">
+          {/* Left Column: Media Gallery */}
+          <div className="biz-product-detail-media-col">
+            <ProductGallery
+              images={product.images}
+              mainImage={product.image}
+              hasVideoThumb={product.hasVideoThumb}
+              videoDuration={product.videoDuration}
+              title={product.title}
+            />
+          </div>
+
+          {/* Right Column: Information & Actions */}
+          <div className="biz-product-detail-info-col">
+            <ProductInfoSection
+              title={product.title}
+              price={product.price}
+              location={product.location}
+              categories={product.categories}
+              description={product.description}
+              businessName={product.businessName}
+              businessAvatar={product.businessAvatar}
+              businessCategory={product.businessCategory}
+              isVerified={product.isVerified}
+              onBuyNow={handleBuyNow}
+              onContactSeller={handleContactSeller}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductDetailPage;

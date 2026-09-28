@@ -33,5 +33,9 @@
 // 10. Registration & Multi-step Onboarding (Figma Node #22400:83)
 @use 'modules/register';
 
-// 11. Comprehensive Responsive Design (Tablet & Mobile Breakpoints)
+// 11. Ads & Store Page (Figma Node #22904:36568)
+@use 'modules/store';
+
+// 12. Comprehensive Responsive Design (Tablet & Mobile Breakpoints)
 @use 'modules/responsive';
+

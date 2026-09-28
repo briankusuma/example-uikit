@@ -5,6 +5,8 @@ import { BusinessProfilePage } from './pages/BusinessProfilePage';
 import { RegisterBusinessPage } from './pages/RegisterBusinessPage';
 import { PlaceholderPage } from './pages/PlaceholderPage';
 import { SkeletonPage } from './pages/SkeletonPage';
+import { AdsStorePage } from './pages/AdsStorePage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
 
 export const App = () => {
   return (
@@ -26,7 +28,8 @@ export const App = () => {
             element={<PlaceholderPage title="Notifications" />}
           />
           <Route path="dashboard" element={<PlaceholderPage title="Dashboard" />} />
-          <Route path="ads-store" element={<PlaceholderPage title="Ads / Store" />} />
+          <Route path="ads-store" element={<AdsStorePage />} />
+          <Route path="ads-store/product/:id" element={<ProductDetailPage />} />
           <Route path="settings" element={<PlaceholderPage title="Settings" />} />
           <Route path="skeleton" element={<SkeletonPage />} />
           <Route path="*" element={<Navigate to="/business-page" replace />} />

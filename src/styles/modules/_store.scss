@@ -1,0 +1,984 @@
+// =============================================================================
+// Ads & Store Page Stylesheet
+// Modular SCSS conforming to Figma Node #22904:36568 and OWW UIKit CDN
+// =============================================================================
+
+.biz-store-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// -----------------------------------------------------------------------------
+// 1. Center Column: Main Content
+// -----------------------------------------------------------------------------
+.biz-store-main {
+  min-width: 0;
+  flex-shrink: 0;
+  padding: 24px 20px;
+  border-left: 1px solid #F1F1F1;
+  border-right: 1px solid #F1F1F1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+
+  &__topbar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: #FFFFFF;
+    z-index: 10;
+    padding-top: 24px;
+    margin-top: -24px;
+  }
+
+  &__feed {
+    width: 100%;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 2. Search Bar
+// -----------------------------------------------------------------------------
+.biz-store-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 20px;
+  background-color: #F8F8F8;
+  border: 1px solid #F5F5F5;
+  border-radius: 100px;
+  box-sizing: border-box;
+  width: 100%;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:focus-within {
+    background-color: #FFFFFF;
+    border-color: #000000;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    font-family: inherit;
+
+    &::placeholder {
+      color: #555555;
+    }
+  }
+
+  &__clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #EAEAEA;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 3. Store Tabs (Ads / Shop)
+// -----------------------------------------------------------------------------
+.biz-store-tabs {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #F1F1F1;
+
+  &__item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 20px;
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555555;
+    font-family: inherit;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: #000000;
+    }
+
+    &--active {
+      color: #000000;
+      font-weight: 600;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__label {
+    line-height: 20px;
+  }
+
+  &__indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background-color: #000000;
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 4. Product Feed Grid
+// -----------------------------------------------------------------------------
+.biz-store-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// 5. Product Card
+// -----------------------------------------------------------------------------
+.biz-store-card {
+  background: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__business {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  &__avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__verified {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__options-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #F5F5F5;
+    }
+  }
+
+  &__media {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #F8F8F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  &__price-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    height: 28px;
+    padding: 4px 8px;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+
+  &__footer {
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 6. Right Column: Recommendation Cards
+// -----------------------------------------------------------------------------
+.biz-store-aside {
+  width: 100%;
+  max-width: 411px;
+  flex-shrink: 0;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.biz-store-widget {
+  background: #FFFFFF;
+  border: 1px solid #F1F1F1;
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+
+  &__divider {
+    border: none;
+    height: 1px;
+    background-color: #F1F1F1;
+    margin: 0;
+    width: 100%;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__footer {
+    display: flex;
+    width: 100%;
+  }
+
+  &__more-btn {
+    color: #555555 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+
+    &:hover {
+      color: #000000 !important;
+      background-color: #F9F9F9 !important;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 7. Store Recommendation Item (Shop / User)
+// -----------------------------------------------------------------------------
+.biz-store-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  &__image-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+  }
+
+  &__verified {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__category {
+    font-size: 12px;
+    color: #555555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+  }
+
+  &__action {
+    flex-shrink: 0;
+  }
+
+  &__btn {
+    height: 32px !important;
+    padding: 0 16px !important;
+    font-size: 12px !important;
+    border-radius: 100px !important;
+    white-space: nowrap !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 8. Empty & Ads Tab States
+// -----------------------------------------------------------------------------
+.biz-store-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  gap: 12px;
+
+  &__icon {
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: #777777;
+    margin: 0 0 12px;
+  }
+}
+
+.biz-store-ads-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.biz-store-ads-banner {
+  background: linear-gradient(135deg, #000000 0%, #2A2A2A 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #FFFFFF;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  &__badge {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: #CCCCCC;
+    margin: 0 0 8px;
+    line-height: 1.5;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 10. Product Detail View (Figma Node #22904:38148)
+// -----------------------------------------------------------------------------
+.biz-product-detail-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  border-right: 1px solid #F1F1F1;
+  box-sizing: border-box;
+}
+
+.biz-product-detail-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #F1F1F1;
+  background-color: #FFFFFF;
+  height: 88px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &__back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #F5F5F5;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+}
+
+.biz-product-detail-body {
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.biz-product-detail-content {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.biz-product-detail-media-col {
+  width: 495px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.biz-product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+
+  &__main {
+    width: 100%;
+    height: 476px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #F8F8F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #F1F1F1;
+  }
+
+  &__main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__thumbnails {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  &__thumb-btn {
+    position: relative;
+    width: 110px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    padding: 0;
+    background: #F8F8F8;
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &--active {
+      border-color: #000000;
+      opacity: 1;
+    }
+  }
+
+  &__thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__video-pill {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 100px;
+    padding: 2px 8px;
+    line-height: 1.4;
+  }
+}
+
+.biz-product-detail-info-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.biz-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__seller {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__seller-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__seller-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #E9E9E9;
+    flex-shrink: 0;
+  }
+
+  &__seller-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__seller-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__seller-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    line-height: 1.3;
+  }
+
+  &__seller-verified {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__seller-category {
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.4;
+  }
+
+  &__share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #E9E9E9;
+    background: #F8F8F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #EEEEEE;
+    }
+  }
+
+  &__divider {
+    border: none;
+    height: 1px;
+    background-color: #F1F1F1;
+    margin: 0;
+    width: 100%;
+  }
+
+  &__main-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__pricing-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+
+  &__price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    line-height: 1.4;
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #555555;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__tag-badge {
+    border: 1px solid #E9E9E9;
+    border-radius: 16px;
+    padding: 6px 14px;
+    font-size: 14px;
+    color: #000000;
+    background-color: #FFFFFF;
+    line-height: 1.4;
+  }
+
+  &__description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000000;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  &__message-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #E9E9E9;
+    background-color: #F8F8F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #EEEEEE;
+    }
+  }
+
+  &__buy-btn {
+    flex: 1;
+    height: 48px !important;
+    border-radius: 100px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 11. Responsive Adjustments
+// -----------------------------------------------------------------------------
+@media (max-width: 1280px) {
+  .biz-store-page {
+    gap: 16px;
+  }
+
+  .biz-store-main {
+    width: 480px;
+  }
+
+  .biz-store-aside {
+    width: 360px;
+  }
+
+  .biz-product-detail-media-col {
+    width: 420px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .biz-store-page {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .biz-store-main {
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    padding: 16px;
+  }
+
+  .biz-store-aside {
+    width: 100%;
+    max-width: 100%;
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    padding: 0 16px 32px;
+  }
+
+  .biz-product-detail-content {
+    flex-direction: column;
+  }
+
+  .biz-product-detail-media-col {
+    width: 100%;
+  }
+
+  .biz-product-gallery__main {
+    height: 320px;
+  }
+}
+
+@media (max-width: 640px) {
+  .biz-store-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .biz-store-main {
+    padding: 12px;
+  }
+
+  .biz-store-tabs__indicator {
+    width: 80px;
+  }
+
+  .biz-product-detail-body {
+    padding: 16px;
+  }
+
+  .biz-product-gallery__main {
+    height: 260px;
+  }
+
+  .biz-product-gallery__thumb-btn {
+    width: 90px;
+    height: 65px;
+  }
+}
+
