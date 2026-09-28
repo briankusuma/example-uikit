@@ -607,7 +607,7 @@
   flex-direction: row;
   gap: 24px;
   width: 100%;
-  align-items: flex-start;
+  align-items: stretch;
   box-sizing: border-box;
 }
 
@@ -626,6 +626,7 @@
   width: 100%;
 
   &__main {
+    position: relative;
     width: 100%;
     height: 476px;
     border-radius: 16px;
@@ -635,6 +636,32 @@
     align-items: center;
     justify-content: center;
     border: 1px solid #F1F1F1;
+    cursor: pointer;
+
+    &:hover {
+      .biz-product-gallery__zoom-hint {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__zoom-hint {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   }
 
   &__main-img {
@@ -642,6 +669,11 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 
   &__thumbnails {
@@ -711,7 +743,13 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
+
+  &__menu-container {
+    position: relative;
+    display: inline-flex;
+  }
 
   &__seller {
     display: flex;
@@ -867,8 +905,10 @@
   &__actions {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
-    margin-top: 8px;
+    margin-top: auto;
+    padding-top: 24px;
     width: 100%;
   }
 
@@ -981,4 +1021,452 @@
     height: 65px;
   }
 }
+
+// =============================================================================
+// Product Lightbox Modal (Figma Node #22682:21543)
+// =============================================================================
+
+.biz-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: lightboxFadeIn 0.2s ease-out;
+}
+
+// Close and Navigation Round Buttons
+.biz-lightbox__btn-close,
+.biz-lightbox__btn-nav {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  border-radius: 100px;
+  background-color: #f8f8f8;
+  border: 1px solid #e9e9e9;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  z-index: 10001;
+  padding: 0;
+
+  &:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.biz-lightbox__btn-close {
+  top: 32px;
+  right: 32px;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+.biz-lightbox__btn-nav--prev {
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &:hover {
+    transform: translateY(-50%) scale(1.08);
+  }
+}
+
+.biz-lightbox__btn-nav--next {
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &:hover {
+    transform: translateY(-50%) scale(1.08);
+  }
+}
+
+// Central Fullscreen Card Container (Figma: width 950px, height 650px)
+.biz-lightbox__card {
+  position: relative;
+  width: 950px;
+  max-width: calc(100vw - 160px);
+  height: 650px;
+  max-height: calc(100vh - 80px);
+  background-color: #000000;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 20px 48px rgba(0, 0, 0, 0.5);
+  animation: lightboxZoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.biz-lightbox__img-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.biz-lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  user-select: none;
+  pointer-events: none;
+}
+
+// Top-Right Pagination Badge (Figma: height 24px, padding 2px 12px, border-radius 100px)
+.biz-lightbox__badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 24px;
+  padding: 2px 12px;
+  border-radius: 100px;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  letter-spacing: -0.02em;
+  user-select: none;
+  z-index: 10;
+}
+
+// Bottom Indicator Bar & Dots (Figma: 24x8 bar for active, 8x8 dot for inactive)
+.biz-lightbox__pagination {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.biz-lightbox__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  &--active {
+    width: 24px;
+    height: 8px;
+    border-radius: 100px;
+    background-color: #ffffff;
+  }
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .biz-lightbox__card {
+    max-width: calc(100vw - 32px);
+    max-height: 70vh;
+    border-radius: 16px;
+  }
+
+  .biz-lightbox__btn-close {
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .biz-lightbox__btn-nav--prev {
+    left: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .biz-lightbox__btn-nav--next {
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// =============================================================================
+// Product Detail Action Dropdown (Figma Node #22689:10619)
+// =============================================================================
+
+.biz-product-action-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 130px;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 14px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 60;
+  box-sizing: border-box;
+  animation: actionDropdownFade 0.15s ease-out;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 38px;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    text-align: left;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #f8f8f8;
+    }
+
+    &--danger {
+      color: #ff0909;
+
+      &:hover {
+        background-color: #ffe9ec;
+      }
+    }
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+
+    &--danger {
+      color: #ff0909;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    width: 100%;
+    background-color: #e4e4e4;
+    border: none;
+    margin: 2px 0;
+  }
+}
+
+@keyframes actionDropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// =============================================================================
+// Delete Confirmation Modal (Figma Node #22631:9286)
+// =============================================================================
+
+.biz-delete-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: deleteModalOverlayFade 0.2s ease-out;
+}
+
+.biz-delete-modal {
+  width: 627px;
+  max-width: 90vw;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 20px;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.16);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  animation: deleteModalScaleUp 0.2s ease-out;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  &__close-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    background-color: #f1f1f1;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+    padding: 0;
+    flex-shrink: 0;
+
+    &:hover {
+      background-color: #e4e4e4;
+      transform: scale(1.05);
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    width: 100%;
+    background-color: #f1f1f1;
+    border: none;
+    margin: 0;
+  }
+
+  &__description {
+    font-size: 16px;
+    font-weight: 400;
+    color: #555555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 4px;
+  }
+
+  &__btn-cancel {
+    min-width: 100px;
+    height: 38px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    background-color: #f8f8f8;
+    border: 1px solid #e9e9e9;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #ececec;
+    }
+  }
+
+  &__btn-delete {
+    min-width: 100px;
+    height: 38px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    background-color: #ffe9ec;
+    border: 1px solid #ffc7cb;
+    color: #ff0909;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+
+    &:hover {
+      background-color: #ffd4da;
+    }
+  }
+}
+
+@keyframes deleteModalOverlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes deleteModalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 

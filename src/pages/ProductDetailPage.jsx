@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ProductDetailTopBar } from '../components/adsStore/ProductDetailTopBar';
 import { ProductGallery } from '../components/adsStore/ProductGallery';
 import { ProductInfoSection } from '../components/adsStore/ProductInfoSection';
+import { DeleteProductModal } from '../components/adsStore/DeleteProductModal';
 import { getProductById } from '../components/adsStore/productsData';
 import { useAppStore } from '../store/useAppStore';
 
@@ -13,13 +14,16 @@ import { useAppStore } from '../store/useAppStore';
 export const ProductDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const setSuccessToast = useAppStore((state) => state.setSuccessToast);
+  const showSuccessToast = useAppStore((state) => state.showSuccessToast);
+  const deleteProduct = useAppStore((state) => state.deleteProduct);
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const product = getProductById(id);
 
   const handleBuyNow = () => {
-    if (setSuccessToast) {
-      setSuccessToast(`Order placed for ${product.title}!`);
+    if (showSuccessToast) {
+      showSuccessToast(`Order placed for ${product.title}!`);
     } else {
       alert(`Proceeding to checkout for ${product.title}`);
     }
@@ -27,6 +31,15 @@ export const ProductDetailPage = () => {
 
   const handleContactSeller = () => {
     navigate('/messages');
+  };
+
+  const handleConfirmDelete = () => {
+    deleteProduct(product.id);
+    if (showSuccessToast) {
+      showSuccessToast('Product deleted successfully!');
+    }
+    setIsDeleteModalOpen(false);
+    navigate('/ads-store');
   };
 
   return (
@@ -65,10 +78,18 @@ export const ProductDetailPage = () => {
               isVerified={product.isVerified}
               onBuyNow={handleBuyNow}
               onContactSeller={handleContactSeller}
+              onDelete={() => setIsDeleteModalOpen(true)}
             />
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal (Figma Node #22631:9286) */}
+      <DeleteProductModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 };

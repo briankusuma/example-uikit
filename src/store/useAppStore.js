@@ -39,6 +39,10 @@ export const useAppStore = create((set) => ({
   products: PRODUCTS_DATA,
   addProduct: (product) =>
     set((state) => ({ products: [product, ...state.products] })),
+  deleteProduct: (id) =>
+    set((state) => ({
+      products: state.products.filter((p) => p.id !== Number(id) && p.id !== id),
+    })),
 
   // Cover Image
   coverImage: '/images/cover-banner.png',

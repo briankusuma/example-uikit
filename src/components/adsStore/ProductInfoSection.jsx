@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '../common/Button';
 import { Icon } from '../common/Icon';
+import { ProductActionDropdown } from './ProductActionDropdown';
 
 /**
  * ProductInfoSection component
- * Figma Node #22904:38167: Seller profile, pricing, tags, description, and purchase actions
+ * Figma Node #22904:38167 and #22689:10619: Seller profile, pricing, tags, description, purchase actions, and options menu
  */
 export const ProductInfoSection = ({
   title,
@@ -18,10 +19,13 @@ export const ProductInfoSection = ({
   isVerified = true,
   onBuyNow,
   onContactSeller,
+  onEdit,
+  onDelete,
   onShare,
   className = '',
 }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleShare = () => {
     if (onShare) {
@@ -61,16 +65,26 @@ export const ProductInfoSection = ({
           </div>
         </div>
 
-        {/* Share / Options Button */}
-        <button
-          type="button"
-          className="biz-product-info__share-btn"
-          onClick={handleShare}
-          title={isCopied ? 'Link Copied!' : 'Share Product'}
-          aria-label="Share product"
-        >
-          <Icon name="dots-three" size={18} color="#000000" />
-        </button>
+        {/* Options / Action Menu (Figma Node #22689:10619) */}
+        <div className="biz-product-info__menu-container">
+          <button
+            type="button"
+            className="biz-product-info__share-btn"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            title="Options"
+            aria-label="Product options"
+            aria-expanded={isMenuOpen}
+          >
+            <Icon name="dots-three" size={18} color="#000000" />
+          </button>
+
+          <ProductActionDropdown
+            isOpen={isMenuOpen}
+            onClose={() => setIsMenuOpen(false)}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        </div>
       </div>
 
       <hr className="biz-product-info__divider" />

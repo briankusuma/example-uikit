@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { ProductLightboxModal } from './ProductLightboxModal';
+import { Icon } from '../common/Icon';
 
 /**
  * ProductGallery component
  * Figma Node #22904:38154: Media preview with large image and interactive thumbnail gallery
+ * Supports full lightbox view conforming to Figma Node #22682:21543
  */
 export const ProductGallery = ({
   images = [],
@@ -14,18 +17,29 @@ export const ProductGallery = ({
 }) => {
   const galleryList = images.length > 0 ? images : [mainImage];
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const activeImage = galleryList[selectedIndex] || mainImage;
 
   return (
     <div className={`biz-product-gallery ${className}`}>
-      {/* Main Large Display Image */}
-      <div className="biz-product-gallery__main">
+      {/* Main Large Display Image (Click to open fullscreen lightbox) */}
+      <div
+        className="biz-product-gallery__main"
+        onClick={() => setIsLightboxOpen(true)}
+        role="button"
+        tabIndex={0}
+        aria-label="Click to enlarge image"
+        title="Click to view fullscreen"
+      >
         <img
           src={activeImage}
           alt={title}
           className="biz-product-gallery__main-img"
         />
+        <div className="biz-product-gallery__zoom-hint">
+          <Icon name="search" size={16} />
+        </div>
       </div>
 
       {/* Thumbnails Row */}
@@ -60,6 +74,15 @@ export const ProductGallery = ({
           })}
         </div>
       )}
+
+      {/* Fullscreen Lightbox Modal (Figma Node #22682:21543) */}
+      <ProductLightboxModal
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        images={galleryList}
+        initialIndex={selectedIndex}
+        title={title}
+      />
     </div>
   );
 };
