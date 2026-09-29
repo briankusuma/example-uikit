@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { TopBar } from './TopBar';
 import { useAppStore } from '../../store/useAppStore';
+import { Icon } from '../common/Icon';
 
 /**
  * AppLayout component.
@@ -65,22 +66,33 @@ export const AppLayout = () => {
       )}
 
       {/* Floating Development/Testing Control (Bottom-Right) */}
-      <button
-        type="button"
-        className={`biz-floating-skeleton-btn ${isLoading ? 'biz-floating-skeleton-btn--active' : ''}`}
-        onClick={() => {
-          if (isLoading) {
-            toggleLoading();
-          } else {
-            simulateLoading(2500);
+        <button
+          type="button"
+          className={`biz-floating-skeleton-btn ${
+            isLoading ? 'biz-floating-skeleton-btn--active' : ''
+          }`}
+          onClick={() => {
+            if (isLoading) {
+              toggleLoading();
+            } else {
+              simulateLoading(2500);
+            }
+          }}
+          title={
+            isLoading
+              ? 'Click to stop skeleton simulation'
+              : 'Click to test 2.5s skeleton loading'
           }
-        }}
-        title={isLoading ? 'Click to stop skeleton simulation' : 'Click to test 2.5s skeleton loading'}
-        aria-label="Test Skeleton"
-      >
-        <span className="biz-floating-skeleton-btn__icon">⚡</span>
-        <span>{isLoading ? 'Simulating (2.5s)...' : 'Test Skeleton'}</span>
-      </button>
+          aria-label="Test Skeleton"
+        >
+          <span className="biz-floating-skeleton-btn__icon">
+            <Icon name="brain" size={18} color="#fff" />
+          </span>
+
+          <span>
+            {isLoading ? 'Simulating (2.5s)' : 'Test Skeleton'}
+          </span>
+        </button>
     </div>
   );
 };

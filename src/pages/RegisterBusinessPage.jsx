@@ -9,6 +9,7 @@ import { Step2ContactForm } from '../components/register/Step2ContactForm';
 import { Step3BrandImagesForm } from '../components/register/Step3BrandImagesForm';
 import { RegisterSuccessModal } from '../components/register/RegisterSuccessModal';
 import { Skeleton, SkeletonText } from '../components/ui';
+import { Icon } from '../components/common/Icon';
 
 export const RegisterBusinessPage = () => {
   const navigate = useNavigate();
@@ -209,22 +210,33 @@ export const RegisterBusinessPage = () => {
       )}
 
       {/* Floating Development/Testing Control (Bottom-Right) */}
-      <button
-        type="button"
-        className={`biz-floating-skeleton-btn ${isLoading ? 'biz-floating-skeleton-btn--active' : ''}`}
-        onClick={() => {
-          if (isLoading) {
-            toggleLoading();
-          } else {
-            simulateLoading(2500);
+        <button
+          type="button"
+          className={`biz-floating-skeleton-btn ${
+            isLoading ? 'biz-floating-skeleton-btn--active' : ''
+          }`}
+          onClick={() => {
+            if (isLoading) {
+              toggleLoading();
+            } else {
+              simulateLoading(2500);
+            }
+          }}
+          title={
+            isLoading
+              ? 'Click to stop skeleton simulation'
+              : 'Click to test 2.5s skeleton loading'
           }
-        }}
-        title={isLoading ? 'Click to stop skeleton simulation' : 'Click to test 2.5s skeleton loading'}
-        aria-label="Test Skeleton"
-      >
-        <span className="biz-floating-skeleton-btn__icon">⚡</span>
-        <span>{isLoading ? 'Simulating (2.5s)...' : 'Test Skeleton'}</span>
-      </button>
+          aria-label="Test Skeleton"
+        >
+          <span className="biz-floating-skeleton-btn__icon">
+            <Icon name="brain" size={18} color="#fff" />
+          </span>
+
+          <span>
+            {isLoading ? 'Simulating (2.5s)' : 'Test Skeleton'}
+          </span>
+        </button>
     </div>
   );
 };
