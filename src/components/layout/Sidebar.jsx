@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppStore } from '../../store/useAppStore';
+import { Skeleton, SkeletonText, SkeletonCircle } from '../ui';
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -46,28 +47,28 @@ export const Sidebar = () => {
           </div>
         </div>
 
-        {/* 8 Skeleton Nav Items matching Figma #23016:27778 - #23016:27799 */}
+        {/* 8 Skeleton Nav Items composed using primitives */}
         <div className="oww-sidebar__nav">
           {[...Array(8)].map((_, idx) => (
             <div key={idx} className="oww-nav-item oww-nav-item--skeleton">
               <span className="oww-nav-item__icon">
-                <span className="biz-skeleton-nav-icon oww-skeleton oww-skeleton--darker" />
+                <Skeleton width="28px" height="28px" borderRadius="4px" variant="darker" />
               </span>
               <div className="oww-nav-item__content">
-                <span className="biz-skeleton-nav-text oww-skeleton" />
+                <SkeletonText width="150px" height="16px" />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom Profile Skeleton matching Figma #23016:27802 */}
+        {/* Bottom Profile Skeleton composed using primitives */}
         <div className="oww-sidebar__footer" style={{ marginTop: 'unset' }}>
           <div className="oww-sidebar__profile oww-sidebar__profile--skeleton">
-            <div className="biz-skeleton-profile-avatar oww-skeleton oww-skeleton--darker" />
+            <SkeletonCircle size="48px" variant="darker" />
             <div className="oww-sidebar__profile-info">
-              <div className="biz-skeleton-profile-name oww-skeleton oww-skeleton--darker" />
+              <SkeletonText width="150px" height="16px" variant="darker" />
             </div>
-            <div className="biz-skeleton-profile-more oww-skeleton oww-skeleton--darker" />
+            <Skeleton width="20px" height="20px" borderRadius="4px" variant="darker" />
           </div>
         </div>
       </aside>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BusinessProfileSkeleton } from '../components/profile/BusinessProfileSkeleton';
+import { BusinessProfilePage } from './BusinessProfilePage';
 import { useAppStore } from '../store/useAppStore';
 
 /**
@@ -9,14 +9,14 @@ export const SkeletonPage = () => {
   const setIsLoading = useAppStore((state) => state.setIsLoading);
 
   useEffect(() => {
-    // Enable skeleton on sidebar when on /skeleton route
+    // Enable skeleton on sidebar and page when on /skeleton route
     setIsLoading(true);
     return () => {
       setIsLoading(false);
     };
   }, [setIsLoading]);
 
-  return <BusinessProfileSkeleton />;
+  return <BusinessProfilePage />;
 };
 
 export default SkeletonPage;
