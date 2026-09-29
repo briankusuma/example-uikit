@@ -1,5 +1,7 @@
 import React from 'react';
 import { Icon } from '../common/Icon';
+import { Skeleton } from '../ui';
+import { useAppStore } from '../../store/useAppStore';
 
 /**
  * StoreSearchBar component
@@ -10,7 +12,14 @@ export const StoreSearchBar = ({
   onChange,
   placeholder = 'Search user, business or product...',
   className = '',
+  isLoading: propLoading,
 }) => {
+  const storeLoading = useAppStore((state) => state.isLoading);
+  const isLoading = propLoading !== undefined ? propLoading : storeLoading;
+
+  if (isLoading) {
+    return <Skeleton width="100%" height="48px" borderRadius="100px" className={className} />;
+  }
   return (
     <div className={`biz-store-search ${className}`}>
       <span className="biz-store-search__icon">

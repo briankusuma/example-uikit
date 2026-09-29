@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Button } from '../common/Button';
 import { Icon } from '../common/Icon';
+import { Skeleton, SkeletonText, SkeletonCircle } from '../ui';
+import { useAppStore } from '../../store/useAppStore';
 
 /**
  * SuggestedUsersCard component
  * Figma Node #22904:36725 ("Suggested for you")
  */
 export const SuggestedUsersCard = ({
+  isLoading: propLoading,
   users = [
     {
       id: 1,
@@ -45,6 +48,9 @@ export const SuggestedUsersCard = ({
   onViewMore,
   className = '',
 }) => {
+  const storeLoading = useAppStore((state) => state.isLoading);
+  const isLoading = propLoading !== undefined ? propLoading : storeLoading;
+
   const [followingMap, setFollowingMap] = useState(() => {
     const initial = {};
     users.forEach((u) => {
@@ -63,6 +69,36 @@ export const SuggestedUsersCard = ({
       onFollowToggle(userId, nextState);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className={`biz-store-widget ${className}`}>
+        <header className="biz-store-widget__header">
+          <SkeletonText width="160px" height="18px" />
+        </header>
+        <hr className="biz-store-widget__divider" />
+
+        <div className="biz-store-widget__list">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="biz-store-item" style={{ alignItems: 'center' }}>
+              <SkeletonCircle size="40px" />
+              <div className="biz-store-item__info" style={{ gap: '6px' }}>
+                <SkeletonText width="100px" height="14px" />
+                <SkeletonText width="140px" height="12px" />
+              </div>
+              <div className="biz-store-item__action">
+                <Skeleton width="65px" height="28px" borderRadius="100px" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="biz-store-widget__footer">
+          <Skeleton width="100%" height="32px" borderRadius="8px" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`biz-store-widget ${className}`}>

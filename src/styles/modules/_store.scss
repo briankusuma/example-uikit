@@ -17,10 +17,9 @@
 // 1. Center Column: Main Content
 // -----------------------------------------------------------------------------
 .biz-store-main {
+  flex: 1;
   min-width: 0;
-  flex-shrink: 0;
   padding: 24px 20px;
-  border-left: 1px solid #F1F1F1;
   border-right: 1px solid #F1F1F1;
   display: flex;
   flex-direction: column;
@@ -945,10 +944,6 @@
 @media (max-width: 1280px) {
   .biz-store-page {
     gap: 16px;
-  }
-
-  .biz-store-main {
-    width: 480px;
   }
 
   .biz-store-aside {

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Icon } from '../common/Icon';
+import { Skeleton, SkeletonText, SkeletonCircle, SkeletonImage } from '../ui';
 
 /**
  * StoreProductCard component
  * Figma Node #22847:16421 (Shop Product Card)
  */
 export const StoreProductCard = ({
+  isLoading = false,
   title,
   price,
   image,
@@ -18,6 +20,28 @@ export const StoreProductCard = ({
   onClick,
   className = '',
 }) => {
+  if (isLoading) {
+    return (
+      <article className={`biz-store-card ${className}`}>
+        {showBusinessProfile && (
+          <header className="biz-store-card__header">
+            <div className="biz-store-card__business" style={{ gap: '8px', display: 'flex', alignItems: 'center' }}>
+              <SkeletonCircle size="24px" />
+              <SkeletonText width="90px" height="14px" />
+            </div>
+          </header>
+        )}
+        <div className="biz-store-card__media">
+          <SkeletonImage width="100%" height="100%" borderRadius="12px" />
+        </div>
+        <footer className="biz-store-card__footer" style={{ paddingTop: '8px' }}>
+          <SkeletonText width="75%" height="16px" />
+          <SkeletonText width="40%" height="14px" style={{ marginTop: '6px' }} />
+        </footer>
+      </article>
+    );
+  }
+
   return (
     <article
       className={`biz-store-card ${className} ${onClick ? 'biz-store-card--clickable' : ''}`}

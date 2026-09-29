@@ -12,6 +12,9 @@ export const AppLayout = () => {
   const location = useLocation();
   const successToast = useAppStore((state) => state.successToast);
   const clearSuccessToast = useAppStore((state) => state.clearSuccessToast);
+  const isLoading = useAppStore((state) => state.isLoading);
+  const simulateLoading = useAppStore((state) => state.simulateLoading);
+  const toggleLoading = useAppStore((state) => state.toggleLoading);
 
   const isAdsStore = location.pathname.startsWith('/ads-store');
 
@@ -38,7 +41,7 @@ export const AppLayout = () => {
         </div>
       </div>
 
-      {/* Global Floating Success Alert (Bottom Right / Top Right) */}
+      {/* Global Floating Success Alert (Bottom-Left / Top-Left) */}
       {successToast && (
         <div
           className={`biz-floating-alert ${isTopPosition ? 'biz-floating-alert--top' : ''}`}
@@ -60,6 +63,24 @@ export const AppLayout = () => {
           </div>
         </div>
       )}
+
+      {/* Floating Development/Testing Control (Bottom-Right) */}
+      <button
+        type="button"
+        className={`biz-floating-skeleton-btn ${isLoading ? 'biz-floating-skeleton-btn--active' : ''}`}
+        onClick={() => {
+          if (isLoading) {
+            toggleLoading();
+          } else {
+            simulateLoading(2500);
+          }
+        }}
+        title={isLoading ? 'Click to stop skeleton simulation' : 'Click to test 2.5s skeleton loading'}
+        aria-label="Test Skeleton"
+      >
+        <span className="biz-floating-skeleton-btn__icon">⚡</span>
+        <span>{isLoading ? 'Simulating (2.5s)...' : 'Test Skeleton'}</span>
+      </button>
     </div>
   );
 };

@@ -59,11 +59,51 @@
   overflow: hidden;
 }
 
-// Responsive TopBar Controls
+// Floating Development/Testing Control (Fixed Bottom-Right)
+.biz-floating-skeleton-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &--active {
+    background-color: #40a729;
+    box-shadow: 0 4px 20px rgba(64, 167, 41, 0.4);
+  }
+
+  &__icon {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 768px) {
-  .biz-topbar__skeleton-controls {
-    button:last-child {
-      display: none;
-    }
+  .biz-floating-skeleton-btn {
+    bottom: 80px;
+    right: 16px;
+    padding: 8px 14px;
+    font-size: 12px;
   }
 }

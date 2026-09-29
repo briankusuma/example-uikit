@@ -621,11 +621,12 @@
   }
 }
 
-// 8.5. Floating Success Alert (Bottom Right / Top Right)
+// 8.5. Floating Success Alert (Bottom Left / Top Left)
 .biz-floating-alert {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 24px;
+  left: 24px;
+  right: auto;
   z-index: 20000; // Always on top of modals (10000)
   display: flex;
   align-items: center;
@@ -633,8 +634,9 @@
 
   &--top {
     bottom: auto;
-    top: 32px;
-    right: 32px;
+    top: 24px;
+    left: 24px;
+    right: auto;
     animation: bizAlertSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 

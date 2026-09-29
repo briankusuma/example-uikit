@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from '../common/Button';
 import { Icon } from '../common/Icon';
+import { useAppStore } from '../../store/useAppStore';
+import { Skeleton, SkeletonText, SkeletonCircle } from '../ui';
 
 /**
  * ExploreProductsFromCard component
@@ -48,7 +50,37 @@ export const ExploreProductsFromCard = ({
   onViewShop,
   onViewMore,
   className = '',
+  isLoading: propIsLoading,
 }) => {
+  const storeIsLoading = useAppStore((state) => state.isLoading);
+  const isLoading = propIsLoading !== undefined ? propIsLoading : storeIsLoading;
+
+  if (isLoading) {
+    return (
+      <div className={`biz-explore-shops-widget ${className}`} aria-busy="true">
+        <div className="biz-explore-shops-widget__header">
+          <SkeletonText width="160px" height="16px" />
+        </div>
+        <hr className="biz-explore-shops-widget__divider" />
+
+        <div className="biz-explore-shops-widget__list">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="biz-explore-shops-item">
+              <SkeletonCircle size="40px" />
+              <div className="biz-explore-shops-item__info" style={{ gap: '6px' }}>
+                <SkeletonText width="120px" height="14px" />
+                <SkeletonText width="70px" height="12px" />
+              </div>
+              <div className="biz-explore-shops-item__action">
+                <Skeleton width="78px" height="32px" borderRadius="100px" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`biz-explore-shops-widget ${className}`}>
       <div className="biz-explore-shops-widget__header">

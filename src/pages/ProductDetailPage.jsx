@@ -16,16 +16,17 @@ export const ProductDetailPage = () => {
   const navigate = useNavigate();
   const showSuccessToast = useAppStore((state) => state.showSuccessToast);
   const deleteProduct = useAppStore((state) => state.deleteProduct);
+  const isLoading = useAppStore((state) => state.isLoading);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const product = getProductById(id);
+  const product = getProductById(id) || {};
 
   const handleBuyNow = () => {
     if (showSuccessToast) {
-      showSuccessToast(`Order placed for ${product.title}!`);
+      showSuccessToast(`Order placed for ${product.title || 'Product'}!`);
     } else {
-      alert(`Proceeding to checkout for ${product.title}`);
+      alert(`Proceeding to checkout for ${product.title || 'Product'}`);
     }
   };
 
@@ -56,6 +57,7 @@ export const ProductDetailPage = () => {
           {/* Left Column: Media Gallery */}
           <div className="biz-product-detail-media-col">
             <ProductGallery
+              isLoading={isLoading}
               images={product.images}
               mainImage={product.image}
               hasVideoThumb={product.hasVideoThumb}
@@ -67,6 +69,7 @@ export const ProductDetailPage = () => {
           {/* Right Column: Information & Actions */}
           <div className="biz-product-detail-info-col">
             <ProductInfoSection
+              isLoading={isLoading}
               title={product.title}
               price={product.price}
               location={product.location}

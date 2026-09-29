@@ -8,12 +8,16 @@ import { Step1ProfileForm } from '../components/register/Step1ProfileForm';
 import { Step2ContactForm } from '../components/register/Step2ContactForm';
 import { Step3BrandImagesForm } from '../components/register/Step3BrandImagesForm';
 import { RegisterSuccessModal } from '../components/register/RegisterSuccessModal';
+import { Skeleton, SkeletonText } from '../components/ui';
 
 export const RegisterBusinessPage = () => {
   const navigate = useNavigate();
   const showSuccessToast = useAppStore((state) => state.showSuccessToast);
   const successToast = useAppStore((state) => state.successToast);
   const clearSuccessToast = useAppStore((state) => state.clearSuccessToast);
+  const isLoading = useAppStore((state) => state.isLoading);
+  const simulateLoading = useAppStore((state) => state.simulateLoading);
+  const toggleLoading = useAppStore((state) => state.toggleLoading);
 
   // Multi-step navigation state: 1 (Step 1 Form), 2 (Contact Details), 3 (Brand Images)
   const [currentStep, setCurrentStep] = useState(1);
@@ -69,71 +73,98 @@ export const RegisterBusinessPage = () => {
 
       {/* 2. Main Content Canvas */}
       <main className="biz-register-content">
-        {/* ================= STEP 1: Register Business ================= */}
-        {currentStep === 1 && (
-          <>
-            <RegisterHeader
-              title="Register Your Business"
-              subtitle="This page helps you create a dedicated Business Page to represent your brand, manage and promote your products, and connect with customers."
-            />
-            <Step1ProfileForm
-              businessName={businessName}
-              setBusinessName={setBusinessName}
-              category={category}
-              setCategory={setCategory}
-              description={description}
-              setDescription={setDescription}
-              onSubmit={handleStep1Submit}
-            />
-          </>
-        )}
+        {isLoading ? (
+          <div style={{ width: '100%', maxWidth: '520px', display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', textAlign: 'center', width: '100%' }}>
+              <SkeletonText width="260px" height="28px" />
+              <SkeletonText width="80%" height="16px" />
+            </div>
 
-        {/* ================= STEP 2: Contact Details ================= */}
-        {currentStep === 2 && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', width: '100%', marginTop: '16px' }}>
+              <div>
+                <SkeletonText width="120px" height="14px" style={{ marginBottom: '8px' }} />
+                <Skeleton width="100%" height="48px" borderRadius="10px" />
+              </div>
+              <div>
+                <SkeletonText width="100px" height="14px" style={{ marginBottom: '8px' }} />
+                <Skeleton width="100%" height="48px" borderRadius="10px" />
+              </div>
+              <div>
+                <SkeletonText width="140px" height="14px" style={{ marginBottom: '8px' }} />
+                <Skeleton width="100%" height="96px" borderRadius="10px" />
+              </div>
+              <Skeleton width="100%" height="48px" borderRadius="100px" style={{ marginTop: '12px' }} />
+            </div>
+          </div>
+        ) : (
           <>
-            <RegisterHeader
-              title="Complete Your Business Profile"
-              subtitle="Complete your business profile to help customers discover, trust, and connect with your business. Or do it later."
-            />
-            <RegisterStepper
-              currentStep={2}
-              onStepClick={setCurrentStep}
-            />
-            <Step2ContactForm
-              email={email}
-              setEmail={setEmail}
-              phone={phone}
-              setPhone={setPhone}
-              countryCode={countryCode}
-              setCountryCode={setCountryCode}
-              website={website}
-              setWebsite={setWebsite}
-              location={location}
-              setLocation={setLocation}
-              onSubmit={handleStep2Submit}
-            />
-          </>
-        )}
+            {/* ================= STEP 1: Register Business ================= */}
+            {currentStep === 1 && (
+              <>
+                <RegisterHeader
+                  title="Register Your Business"
+                  subtitle="This page helps you create a dedicated Business Page to represent your brand, manage and promote your products, and connect with customers."
+                />
+                <Step1ProfileForm
+                  businessName={businessName}
+                  setBusinessName={setBusinessName}
+                  category={category}
+                  setCategory={setCategory}
+                  description={description}
+                  setDescription={setDescription}
+                  onSubmit={handleStep1Submit}
+                />
+              </>
+            )}
 
-        {/* ================= STEP 3: Brand Images ================= */}
-        {currentStep === 3 && (
-          <>
-            <RegisterHeader
-              title="Complete Your Business Profile"
-              subtitle="Complete your business profile to help customers discover, trust, and connect with your business. Or do it later."
-            />
-            <RegisterStepper
-              currentStep={3}
-              onStepClick={setCurrentStep}
-            />
-            <Step3BrandImagesForm
-              profileImage={profileImage}
-              setProfileImage={setProfileImage}
-              coverImage={coverImage}
-              setCoverImage={setCoverImage}
-              onSubmit={handleStep3Submit}
-              onPrevious={() => setCurrentStep(2)}
-            />
+            {/* ================= STEP 2: Contact Details ================= */}
+            {currentStep === 2 && (
+              <>
+                <RegisterHeader
+                  title="Complete Your Business Profile"
+                  subtitle="Complete your business profile to help customers discover, trust, and connect with your business. Or do it later."
+                />
+                <RegisterStepper
+                  currentStep={2}
+                  onStepClick={setCurrentStep}
+                />
+                <Step2ContactForm
+                  email={email}
+                  setEmail={setEmail}
+                  phone={phone}
+                  setPhone={setPhone}
+                  countryCode={countryCode}
+                  setCountryCode={setCountryCode}
+                  website={website}
+                  setWebsite={setWebsite}
+                  location={location}
+                  setLocation={setLocation}
+                  onSubmit={handleStep2Submit}
+                />
+              </>
+            )}
+
+            {/* ================= STEP 3: Brand Images ================= */}
+            {currentStep === 3 && (
+              <>
+                <RegisterHeader
+                  title="Complete Your Business Profile"
+                  subtitle="Complete your business profile to help customers discover, trust, and connect with your business. Or do it later."
+                />
+                <RegisterStepper
+                  currentStep={3}
+                  onStepClick={setCurrentStep}
+                />
+                <Step3BrandImagesForm
+                  profileImage={profileImage}
+                  setProfileImage={setProfileImage}
+                  coverImage={coverImage}
+                  setCoverImage={setCoverImage}
+                  onSubmit={handleStep3Submit}
+                  onPrevious={() => setCurrentStep(2)}
+                />
+              </>
+            )}
           </>
         )}
       </main>
@@ -176,6 +207,24 @@ export const RegisterBusinessPage = () => {
           </div>
         </div>
       )}
+
+      {/* Floating Development/Testing Control (Bottom-Right) */}
+      <button
+        type="button"
+        className={`biz-floating-skeleton-btn ${isLoading ? 'biz-floating-skeleton-btn--active' : ''}`}
+        onClick={() => {
+          if (isLoading) {
+            toggleLoading();
+          } else {
+            simulateLoading(2500);
+          }
+        }}
+        title={isLoading ? 'Click to stop skeleton simulation' : 'Click to test 2.5s skeleton loading'}
+        aria-label="Test Skeleton"
+      >
+        <span className="biz-floating-skeleton-btn__icon">⚡</span>
+        <span>{isLoading ? 'Simulating (2.5s)...' : 'Test Skeleton'}</span>
+      </button>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '../common/Icon';
+import { SkeletonText } from '../ui';
+import { useAppStore } from '../../store/useAppStore';
 
 /**
  * ProductDetailTopBar component
@@ -10,8 +12,11 @@ export const ProductDetailTopBar = ({
   title = 'Product Detail',
   onBack,
   className = '',
+  isLoading: propLoading,
 }) => {
   const navigate = useNavigate();
+  const storeLoading = useAppStore((state) => state.isLoading);
+  const isLoading = propLoading !== undefined ? propLoading : storeLoading;
 
   const handleBack = () => {
     if (onBack) {
@@ -31,7 +36,9 @@ export const ProductDetailTopBar = ({
       >
         <Icon name="arrow-left" size={24} color="#000000" />
       </button>
-      <h1 className="biz-product-detail-topbar__title">{title}</h1>
+      <h1 className="biz-product-detail-topbar__title">
+        {isLoading ? <SkeletonText width="140px" height="22px" /> : title}
+      </h1>
     </header>
   );
 };

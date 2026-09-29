@@ -3,12 +3,14 @@ import { Button } from '../common/Button';
 import { Icon } from '../common/Icon';
 import { ProductActionDropdown } from './ProductActionDropdown';
 import { ProductShareModal } from './ProductShareModal';
+import { Skeleton, SkeletonText, SkeletonCircle } from '../ui';
 
 /**
  * ProductInfoSection component
  * Figma Node #22904:38167, #22689:10619, and #22703:20565: Seller profile, pricing, tags, description, purchase actions, options menu, and share popup
  */
 export const ProductInfoSection = ({
+  isLoading = false,
   title,
   price,
   location = 'Juba, South Sudan',
@@ -28,6 +30,56 @@ export const ProductInfoSection = ({
   const [isCopied, setIsCopied] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  if (isLoading) {
+    return (
+      <div className={`biz-product-info ${className}`}>
+        {/* Seller / Business Header */}
+        <div className="biz-product-info__seller">
+          <div className="biz-product-info__seller-profile" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <SkeletonCircle size="48px" />
+            <div className="biz-product-info__seller-details" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <SkeletonText width="120px" height="16px" />
+              <SkeletonText width="80px" height="13px" />
+            </div>
+          </div>
+          <SkeletonCircle size="32px" />
+        </div>
+
+        <hr className="biz-product-info__divider" />
+
+        {/* Main Details: Title, Price, Location */}
+        <div className="biz-product-info__main-details" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div className="biz-product-info__pricing-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <SkeletonText width="70%" height="24px" />
+            <SkeletonText width="35%" height="26px" />
+          </div>
+          <SkeletonText width="40%" height="14px" />
+        </div>
+
+        {/* Categories / Tags */}
+        <div className="biz-product-info__section">
+          <SkeletonText width="70px" height="14px" style={{ marginBottom: '8px' }} />
+          <div className="biz-product-info__tags">
+            <Skeleton width="130px" height="28px" borderRadius="100px" />
+            <Skeleton width="100px" height="28px" borderRadius="100px" />
+          </div>
+        </div>
+
+        {/* Description */}
+        <div className="biz-product-info__section">
+          <SkeletonText width="80px" height="14px" style={{ marginBottom: '8px' }} />
+          <SkeletonText count={3} width="100%" height="14px" />
+        </div>
+
+        {/* Action Buttons: Share + Buy Now */}
+        <div className="biz-product-info__actions">
+          <Skeleton width="48px" height="48px" borderRadius="100px" />
+          <Skeleton width="100%" height="48px" borderRadius="100px" />
+        </div>
+      </div>
+    );
+  }
 
   const handleShare = () => {
     if (onShare) {

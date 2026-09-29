@@ -2,10 +2,30 @@ import React, { useState } from 'react';
 import { Button } from '../common/Button';
 import { CoverModal } from './CoverModal';
 import { useAppStore } from '../../store/useAppStore';
+import { Skeleton, SkeletonImage } from '../ui';
 
-export const ProfileCover = ({ isEditable = true }) => {
+export const ProfileCover = ({ isEditable = true, isLoading: propIsLoading }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { coverImage, setCoverImage } = useAppStore();
+  const { coverImage, setCoverImage, isLoading: storeIsLoading } = useAppStore();
+  const isLoading = propIsLoading !== undefined ? propIsLoading : storeIsLoading;
+
+  if (isLoading) {
+    return (
+      <div className="biz-profile__cover-wrapper" aria-busy="true">
+        <SkeletonImage
+          width="100%"
+          height="100%"
+          borderRadius="0px"
+          style={{ position: 'absolute', inset: 0 }}
+        />
+        {isEditable && (
+          <div className="biz-profile__cover-btn">
+            <Skeleton width="120px" height="32px" borderRadius="100px" variant="button" />
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="biz-profile__cover-wrapper">

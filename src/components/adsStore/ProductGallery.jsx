@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ProductLightboxModal } from './ProductLightboxModal';
 import { Icon } from '../common/Icon';
+import { Skeleton, SkeletonImage } from '../ui';
 
 /**
  * ProductGallery component
@@ -8,6 +9,7 @@ import { Icon } from '../common/Icon';
  * Supports full lightbox view conforming to Figma Node #22682:21543
  */
 export const ProductGallery = ({
+  isLoading = false,
   images = [],
   mainImage = '',
   hasVideoThumb = false,
@@ -18,6 +20,21 @@ export const ProductGallery = ({
   const galleryList = images.length > 0 ? images : [mainImage];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  if (isLoading) {
+    return (
+      <div className={`biz-product-gallery ${className}`}>
+        <div className="biz-product-gallery__main" style={{ cursor: 'default' }}>
+          <SkeletonImage width="100%" height="100%" borderRadius="12px" />
+        </div>
+        <div className="biz-product-gallery__thumbnails">
+          {[1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} width="88px" height="88px" borderRadius="10px" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   const activeImage = galleryList[selectedIndex] || mainImage;
 

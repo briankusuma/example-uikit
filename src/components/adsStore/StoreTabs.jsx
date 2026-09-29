@@ -1,5 +1,7 @@
 import React from 'react';
 import { Icon } from '../common/Icon';
+import { SkeletonText } from '../ui';
+import { useAppStore } from '../../store/useAppStore';
 
 /**
  * StoreTabs component
@@ -9,7 +11,11 @@ export const StoreTabs = ({
   activeTab = 'shop',
   onTabChange,
   className = '',
+  isLoading: propLoading,
 }) => {
+  const storeLoading = useAppStore((state) => state.isLoading);
+  const isLoading = propLoading !== undefined ? propLoading : storeLoading;
+
   const tabs = [
     {
       id: 'ads',
@@ -22,6 +28,19 @@ export const StoreTabs = ({
       icon: 'storefront',
     },
   ];
+
+  if (isLoading) {
+    return (
+      <div className={`biz-store-tabs ${className}`} aria-busy="true">
+        <div className="biz-store-tabs__item biz-store-tabs__item--active" style={{ cursor: 'default' }}>
+          <SkeletonText width="56px" height="16px" />
+        </div>
+        <div className="biz-store-tabs__item" style={{ cursor: 'default' }}>
+          <SkeletonText width="56px" height="16px" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`biz-store-tabs ${className}`}>

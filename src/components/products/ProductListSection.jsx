@@ -6,6 +6,7 @@ import { StoreProductCard } from '../adsStore/StoreProductCard';
 import { ProductEmptyState } from './ProductEmptyState';
 import { AddProductModal } from './AddProductModal';
 import { ProductFilterDropdown } from './ProductFilterDropdown';
+import { Skeleton, SkeletonText } from '../ui';
 import { useAppStore } from '../../store/useAppStore';
 
 const parsePrice = (priceStr) => {
@@ -23,7 +24,7 @@ const parsePrice = (priceStr) => {
  */
 export const ProductListSection = ({ isEditable = true }) => {
   const navigate = useNavigate();
-  const { products } = useAppStore();
+  const { products, isLoading } = useAppStore();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(9);
@@ -72,62 +73,87 @@ export const ProductListSection = ({ isEditable = true }) => {
       {/* Header: Title, Subtitle, Filter & Add Actions */}
       <div className="biz-product-section__header">
         <div className="biz-product-section__header-left">
-          <h3 className="biz-product-section__title">Explore Products</h3>
+          <h3 className="biz-product-section__title">
+            {isLoading ? <SkeletonText width="160px" height="22px" /> : 'Explore Products'}
+          </h3>
           <p className="biz-product-section__subtitle">
-            {filteredAndSortedProducts.length > 0
-              ? `${filteredAndSortedProducts.length} product${filteredAndSortedProducts.length > 1 ? 's' : ''} in total`
-              : '0 product in total'}
+            {isLoading ? (
+              <SkeletonText width="110px" height="14px" />
+            ) : filteredAndSortedProducts.length > 0 ? (
+              `${filteredAndSortedProducts.length} product${filteredAndSortedProducts.length > 1 ? 's' : ''} in total`
+            ) : (
+              '0 product in total'
+            )}
           </p>
         </div>
 
         <div className="biz-product-section__header-actions">
-          {/* Filter Dropdown Container */}
-          <div className="biz-product-section__filter-wrapper">
-            <Button
-              variant={filters.isApplied ? 'primary' : 'outline'}
-              size="md"
-              leftIcon={<Icon name="filter" size={18} />}
-              onClick={() => setIsFilterOpen((prev) => !prev)}
-              aria-expanded={isFilterOpen}
-            >
-              Filter{filters.isApplied ? ' (Active)' : ''}
-            </Button>
+          {isLoading ? (
+            <>
+              <Skeleton width="85px" height="38px" borderRadius="100px" />
+              {isEditable && <Skeleton width="120px" height="38px" borderRadius="100px" />}
+            </>
+          ) : (
+            <>
+              {/* Filter Dropdown Container */}
+              <div className="biz-product-section__filter-wrapper">
+                <Button
+                  variant={filters.isApplied ? 'primary' : 'outline'}
+                  size="md"
+                  leftIcon={<Icon name="filter" size={18} />}
+                  onClick={() => setIsFilterOpen((prev) => !prev)}
+                  aria-expanded={isFilterOpen}
+                >
+                  Filter{filters.isApplied ? ' (Active)' : ''}
+                </Button>
 
-            <ProductFilterDropdown
-              isOpen={isFilterOpen}
-              onClose={() => setIsFilterOpen(false)}
-              currentFilters={filters}
-              onApply={(newFilters) => {
-                setFilters({ ...newFilters, isApplied: true });
-                setVisibleCount(9);
-              }}
-              onReset={() => {
-                setFilters({
-                  minPrice: 20000,
-                  maxPrice: 150000,
-                  sortBy: 'newest',
-                  isApplied: false,
-                });
-                setVisibleCount(9);
-              }}
-            />
-          </div>
+                <ProductFilterDropdown
+                  isOpen={isFilterOpen}
+                  onClose={() => setIsFilterOpen(false)}
+                  currentFilters={filters}
+                  onApply={(newFilters) => {
+                    setFilters({ ...newFilters, isApplied: true });
+                    setVisibleCount(9);
+                  }}
+                  onReset={() => {
+                    setFilters({
+                      minPrice: 20000,
+                      maxPrice: 150000,
+                      sortBy: 'newest',
+                      isApplied: false,
+                    });
+                    setVisibleCount(9);
+                  }}
+                />
+              </div>
 
-          {isEditable && (
-            <Button
-              variant="primary"
-              size="md"
-              leftIcon={<Icon name="plus" size={18} />}
-              onClick={() => setIsAddModalOpen(true)}
-            >
-              Add Product
-            </Button>
+              {isEditable && (
+                <Button
+                  variant="primary"
+                  size="md"
+                  leftIcon={<Icon name="plus" size={18} />}
+                  onClick={() => setIsAddModalOpen(true)}
+                >
+                  Add Product
+                </Button>
+              )}
+            </>
           )}
         </div>
       </div>
 
       {/* Product Grid or Empty State */}
-      {filteredAndSortedProducts.length === 0 ? (
+      {isLoading ? (
+        products.length === 0 ? (
+          <ProductEmptyState isLoading={true} />
+        ) : (
+          <div className="biz-product-section__grid">
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <StoreProductCard key={`skel-prod-${idx}`} isLoading showBusinessProfile={false} />
+            ))}
+          </div>
+        )
+      ) : filteredAndSortedProducts.length === 0 ? (
         <ProductEmptyState />
       ) : (
         <div className="biz-product-section__grid">
@@ -145,7 +171,7 @@ export const ProductListSection = ({ isEditable = true }) => {
       )}
 
       {/* Show More Button (Figma Node #22904:38323) */}
-      {filteredAndSortedProducts.length > visibleCount && (
+      {!isLoading && filteredAndSortedProducts.length > visibleCount && (
         <div className="biz-product-section__footer">
           <Button
             variant="outline"
